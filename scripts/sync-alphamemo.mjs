@@ -71,6 +71,7 @@ function collectFrom(html) {
       title: `${name}${fy && fq ? ` ${fy}Q${fq}` : ""} 法說會逐字稿`,
       context: chunk,
       code: idSet.has(code) ? code : "",
+      rawCode: code, // 有結構化股號但不在地圖上 → 確定非成分股,之後不做模糊比對
       date: get("audio_date"),
     });
   }
@@ -208,13 +209,15 @@ async function main() {
     const { title, context } = entry;
     const hay = `${title} ${context}`;
     let code = entry.code || "";
-    if (!code) {
+    // 名稱模糊比對只用在沒有結構化股號的項目上,
+    // 避免「宏碁資訊」「崇越電通」這類名稱相近的其他公司被誤歸戶
+    if (!code && !entry.rawCode) {
       const codeM = hay.match(/[(（【\s](\d{4})[)）】\s]/);
       if (codeM && idSet.has(codeM[1])) code = codeM[1];
-    }
-    if (!code) {
-      const hit = companies.find((c) => hay.includes(c.name));
-      if (hit) code = hit.code;
+      if (!code) {
+        const hit = companies.find((c) => hay.includes(c.name));
+        if (hit) code = hit.code;
+      }
     }
     const item = {
       date: entry.date || findDate(hay),
