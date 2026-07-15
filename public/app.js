@@ -403,10 +403,29 @@
       .call(zoom.transform, d3.zoomIdentity.translate(width / 2 - k * n.x, height / 2 - k * n.y).scale(k));
   }
 
-  // ---------- 報價 ----------
+  // ---------- 報價 / 法說會 / 研究文件 ----------
   let quotes = {};
   let quoteDate = "";
+  let confs = {};   // 法說會:交易所開放資料(伺服器代理)
+  let docs = {};    // 研究文件:docs/<股號>/ 資料夾自動索引
   const quoteStatus = document.getElementById("quote-status");
+
+  // 外部字串(API 資料、檔名)一律跳脫後才放進 innerHTML
+  const esc = (s) =>
+    String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+  const rerenderPanel = () => {
+    if (state.selected) renderPanel(nodeById.get(state.selected));
+  };
+  fetch("/api/conferences")
+    .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
+    .then((d) => { confs = d.conferences || {}; rerenderPanel(); })
+    .catch(() => {});
+  fetch("/api/docs")
+    .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
+    .then((d) => { docs = d.docs || {}; rerenderPanel(); })
+    .catch(() => {});
+
   fetch("/api/quotes")
     .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
     .then((data) => {
@@ -502,6 +521,49 @@
             .join("")
         : "";
 
+    // 法說會(僅台股;資料來自交易所開放資料)
+    const confItems = (confs[n.id] || []).slice(0, 3);
+    const confBlock = confItems.length
+      ? `<h3>法說會</h3>` +
+        confItems
+          .map((c) => {
+            const head = `<span class="who">${esc(c.date)}</span><span class="what">${esc(c.msg || c.place || "")}</span>`;
+            return c.url && /^https?:/i.test(c.url)
+              ? `<a class="rel-item" href="${esc(c.url)}" target="_blank" rel="noopener">${head}</a>`
+              : `<div class="rel-item static">${head}</div>`;
+          })
+          .join("")
+      : "";
+
+    // 研究文件(docs/<股號>/ 內的逐字稿、券商報告、簡報等)
+    const docItems = docs[n.id] || [];
+    const docBlock =
+      n.market === "foreign" && !docItems.length
+        ? ""
+        : `<h3>研究文件${docItems.length ? `(${docItems.length})` : ""}</h3>` +
+          (docItems.length
+            ? docItems
+                .map(
+                  (d) =>
+                    `<a class="rel-item" href="${esc(d.url)}" target="_blank" rel="noopener">
+                       <span class="who"><span class="doc-type">${esc(d.type)}</span>${esc(d.title)}</span>
+                       ${d.date ? `<span class="what">${esc(d.date)}</span>` : ""}
+                     </a>`
+                )
+                .join("")
+            : `<div class="doc-hint">將逐字稿或券商報告放入 <code>docs/${esc(n.id)}/</code><br>檔名:<code>日期_類型_標題.pdf</code>,重新整理即會列出。</div>`);
+
+    // 外部資源(公開網站的個股頁)
+    const extBlock =
+      n.market === "foreign"
+        ? ""
+        : `<h3>外部資源</h3><div class="ext-links">
+             <a href="https://mops.twse.com.tw/mops/#/web/t146sb05?companyId=${n.id}" target="_blank" rel="noopener">MOPS</a>
+             <a href="https://statementdog.com/analysis/${n.id}" target="_blank" rel="noopener">財報狗</a>
+             <a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=${n.id}" target="_blank" rel="noopener">Goodinfo</a>
+             <a href="https://tw.stock.yahoo.com/quote/${n.id}.TW" target="_blank" rel="noopener">Yahoo</a>
+           </div>`;
+
     const stage = STAGES[stageOfSector.get(n.sector)];
     panel.innerHTML = `
       <button class="panel-close" title="關閉">✕</button>
@@ -514,10 +576,13 @@
           : ""
       }
       <p class="desc">${n.desc}</p>
+      ${confBlock}
+      ${docBlock}
       ${relBlock("上游供應商", rel.up, "←")}
       ${relBlock("下游客戶", rel.down, "→")}
       ${relBlock("集團/持股", rel.group, "")}
       ${relBlock("競爭對手", rel.rival, "")}
+      ${extBlock}
     `;
     panel.classList.add("open");
     panel.querySelector(".panel-close").onclick = () => select(null);

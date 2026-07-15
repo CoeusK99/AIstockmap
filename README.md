@@ -19,12 +19,16 @@
 - **搜尋**:代號或名稱(如 `2330`、`聯發科`),自動置中
 - **收盤報價**:伺服器代理 TWSE/TPEx 公開 OpenAPI,面板顯示收盤價與漲跌
   (台股慣例紅漲綠跌);抓不到時自動退化成純地圖模式
+- **法說會資訊**:自動同步交易所開放資料(日期、訊息擇要、專區連結)到個股面板
+- **研究文件庫**:把法說會逐字稿、券商報告等檔案放進 `docs/<股號>/`,
+  面板自動建立索引與下載連結(詳見 `docs/README.md`;逐字稿與券商報告
+  無公開 API,需自行放入)
+- **外部資源**:每檔個股一鍵連到 MOPS、財報狗、Goodinfo、Yahoo 股市
 - **深色模式**:跟隨系統主題;節點依供應鏈上游→下游大致由左至右分布
 
 ## 執行
 
 ```bash
-cd tw-stock-map
 npm install
 npm start          # http://localhost:3000
 ```
@@ -37,5 +41,9 @@ npm start          # http://localhost:3000
   - 上市:`https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL`
   - 上櫃:`https://www.tpex.org.tw/openapi/v1/tpex_mainboard_daily_close_quotes`
   - 伺服器端快取 10 分鐘,失敗時回傳舊快取或空資料。
+- 法說會來源(伺服器端快取 6 小時,守備式欄位解析):
+  - 上市:`https://openapi.twse.com.tw/v1/opendata/t187ap38_L`
+  - 上櫃:`https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap38_O`
+- 研究文件:`docs/<股號>/日期_類型_標題.pdf`,由 `/api/docs` 自動掃描建索引。
 
 > 本專案僅供產業研究與學習,不構成投資建議。
