@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>台灣科技股產業地圖</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📈</text></svg>">
+<style>
+  /* ---------- 主題色票(淺色為預設,深色跟隨系統)---------- */
+  :root {
+    color-scheme: light;
+    --surface-1: #fcfcfb;      /* 圖表底 */
+    --plane: #f9f9f7;          /* 頁面底 */
+    --text-primary: #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted: #898781;
+    --grid: #e1e0d9;
+    --baseline: #c3c2b7;
+    --border: rgba(11, 11, 11, 0.10);
+    /* 產業別(固定順序的類別色) */
+    --s-ic: #2a78d6;       /* 藍  IC 設計 */
+    --s-fab: #008300;      /* 綠  晶圓製造 */
+    --s-mem: #e87ba4;      /* 洋紅 記憶體 */
+    --s-osat: #eda100;     /* 黃  封測 */
+    --s-equip: #1baf7a;    /* 青  設備材料 */
+    --s-comp: #eb6834;     /* 橘  零組件 */
+    --s-ems: #4a3aa7;      /* 紫  組裝代工 */
+    --s-brand: #e34948;    /* 紅  品牌網通 */
+    --s-abroad: #898781;   /* 灰  海外(中性,不占類別色) */
+    /* 台股慣例:紅漲綠跌 */
+    --quote-up: #d03b3b;
+    --quote-down: #006300;
+    --panel-bg: #ffffff;
+    --chip-bg: #f0efec;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+      color-scheme: dark;
+      --surface-1: #1a1a19;
+      --plane: #0d0d0d;
+      --text-primary: #ffffff;
+      --text-secondary: #c3c2b7;
+      --text-muted: #898781;
+      --grid: #2c2c2a;
+      --baseline: #383835;
+      --border: rgba(255, 255, 255, 0.10);
+      --s-ic: #3987e5;
+      --s-fab: #008300;
+      --s-mem: #d55181;
+      --s-osat: #c98500;
+      --s-equip: #199e70;
+      --s-comp: #d95926;
+      --s-ems: #9085e9;
+      --s-brand: #e66767;
+      --s-abroad: #898781;
+      --quote-up: #e66767;
+      --quote-down: #0ca30c;
+      --panel-bg: #212120;
+      --chip-bg: #2c2c2a;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    font-family: system-ui, -apple-system, "Segoe UI", "Noto Sans TC", sans-serif;
+    background: var(--plane);
+    color: var(--text-primary);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* ---------- 頂欄 ---------- */
+  header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    background: var(--panel-bg);
+    flex-wrap: wrap;
+  }
+  header h1 { font-size: 16px; margin: 0; white-space: nowrap; }
+  header .sub { font-size: 12px; color: var(--text-muted); white-space: nowrap; }
+  #search {
+    flex: 0 1 220px;
+    min-width: 140px;
+    padding: 6px 10px;
+    font-size: 13px;
+    border: 1px solid var(--baseline);
+    border-radius: 8px;
+    background: var(--surface-1);
+    color: var(--text-primary);
+  }
+  .chips { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+  .chip {
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--baseline);
+    background: var(--chip-bg);
+    color: var(--text-secondary);
+    cursor: pointer;
+    user-select: none;
+  }
+  .chip.on { background: var(--text-primary); color: var(--plane); border-color: var(--text-primary); }
+  .edge-toggles { display: flex; gap: 10px; align-items: center; font-size: 12px; color: var(--text-secondary); }
+  .edge-toggles label { display: flex; gap: 4px; align-items: center; cursor: pointer; white-space: nowrap; }
+  #layout-toggle {
+    display: flex; border: 1px solid var(--baseline); border-radius: 8px; overflow: hidden;
+  }
+  #layout-toggle button {
+    border: none; background: var(--surface-1); color: var(--text-secondary);
+    font-size: 12px; padding: 6px 12px; cursor: pointer; white-space: nowrap;
+  }
+  #layout-toggle button + button { border-left: 1px solid var(--baseline); }
+  #layout-toggle button.on { background: var(--text-primary); color: var(--plane); }
+
+  /* ---------- 主區 ---------- */
+  main { flex: 1; display: flex; min-height: 0; position: relative; }
+
+  /* 左側:產業圖例 */
+  aside.legend {
+    width: 168px;
+    flex: none;
+    padding: 12px;
+    border-right: 1px solid var(--border);
+    background: var(--panel-bg);
+    overflow-y: auto;
+    font-size: 13px;
+  }
+  aside.legend h2 { font-size: 12px; color: var(--text-muted); margin: 0 0 8px; font-weight: 600; }
+  .legend-item {
+    display: flex; align-items: center; gap: 8px;
+    padding: 5px 6px; border-radius: 6px; cursor: pointer; user-select: none;
+    color: var(--text-secondary);
+  }
+  .legend-item:hover { background: var(--chip-bg); }
+  .legend-item.off { opacity: 0.35; }
+  .legend-item .dot { width: 12px; height: 12px; border-radius: 50%; flex: none; border: 1px solid var(--border); }
+  .legend-item .n { margin-left: auto; color: var(--text-muted); font-size: 11px; }
+  .legend-hint { font-size: 11px; color: var(--text-muted); margin-top: 6px; }
+  .edge-legend { margin-top: 16px; font-size: 12px; color: var(--text-secondary); }
+  .edge-legend .row { display: flex; align-items: center; gap: 8px; padding: 3px 0; }
+  .edge-legend svg { flex: none; }
+
+  /* 圖區 */
+  #graph { flex: 1; min-width: 0; background: var(--surface-1); cursor: grab; }
+  #graph:active { cursor: grabbing; }
+  #graph text { pointer-events: none; }
+
+  /* 右側:個股資訊 */
+  aside.panel {
+    width: 300px;
+    flex: none;
+    border-left: 1px solid var(--border);
+    background: var(--panel-bg);
+    overflow-y: auto;
+    padding: 16px;
+    display: none;
+  }
+  aside.panel.open { display: block; }
+  .panel-close { float: right; border: none; background: none; font-size: 18px; cursor: pointer; color: var(--text-muted); }
+  .panel h2 { margin: 0 0 2px; font-size: 18px; }
+  .panel .ticker { color: var(--text-muted); font-size: 13px; }
+  .panel .sector-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; color: var(--text-secondary);
+    border: 1px solid var(--baseline); border-radius: 999px;
+    padding: 2px 10px; margin: 8px 0;
+  }
+  .panel .sector-chip .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .panel .quote { margin: 6px 0 10px; font-size: 14px; }
+  .panel .quote .price { font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .panel .quote .chg { margin-left: 8px; font-variant-numeric: tabular-nums; }
+  .panel .quote .chg.up { color: var(--quote-up); }
+  .panel .quote .chg.down { color: var(--quote-down); }
+  .panel .quote .asof { font-size: 11px; color: var(--text-muted); }
+  .panel .desc { font-size: 13px; line-height: 1.7; color: var(--text-secondary); }
+  .panel h3 { font-size: 12px; color: var(--text-muted); margin: 16px 0 6px; font-weight: 600; }
+  .rel-item {
+    display: block; width: 100%; text-align: left;
+    border: 1px solid var(--border); background: var(--surface-1);
+    border-radius: 8px; padding: 7px 10px; margin-bottom: 6px;
+    cursor: pointer; font-size: 13px; color: var(--text-primary);
+  }
+  .rel-item:hover { border-color: var(--baseline); }
+  .rel-item .who { font-weight: 600; }
+  .rel-item .what { display: block; font-size: 12px; color: var(--text-muted); margin-top: 1px; }
+
+  /* 浮動提示 */
+  #tooltip {
+    position: fixed; pointer-events: none; z-index: 10;
+    background: var(--panel-bg); color: var(--text-primary);
+    border: 1px solid var(--border); border-radius: 8px;
+    padding: 8px 10px; font-size: 12px; line-height: 1.5;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+    max-width: 260px; display: none;
+  }
+  #tooltip .t-name { font-weight: 700; font-size: 13px; }
+  #tooltip .t-sub { color: var(--text-muted); }
+
+  /* 右下角控制 */
+  .zoom-ctrl {
+    position: absolute; right: 12px; bottom: 12px;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .panel.open ~ .zoom-ctrl { right: 312px; }
+  .zoom-ctrl button {
+    width: 32px; height: 32px; border-radius: 8px;
+    border: 1px solid var(--baseline); background: var(--panel-bg);
+    color: var(--text-primary); font-size: 15px; cursor: pointer;
+  }
+
+  footer {
+    padding: 5px 16px; font-size: 11px; color: var(--text-muted);
+    border-top: 1px solid var(--border); background: var(--panel-bg);
+    display: flex; gap: 12px; flex-wrap: wrap;
+  }
+
+  @media (max-width: 800px) {
+    aside.legend { display: none; }
+    aside.panel { position: absolute; right: 0; top: 0; bottom: 0; box-shadow: -8px 0 24px rgba(0,0,0,0.2); }
+    .panel.open ~ .zoom-ctrl { right: 12px; }
+  }
+</style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>台灣科技股產業地圖</h1>
+      <div class="sub">供應鏈 × 集團 × 競爭關係</div>
+    </div>
+    <input id="search" list="stock-list" placeholder="搜尋代號或名稱,如 2330">
+    <datalist id="stock-list"></datalist>
+    <div id="layout-toggle">
+      <button data-mode="chain" class="on">產業鏈</button>
+      <button data-mode="net">自由網絡</button>
+    </div>
+    <div class="chips" id="tag-chips"></div>
+    <div class="edge-toggles" id="edge-toggles">
+      <label><input type="checkbox" data-type="supply" checked> 供應鏈</label>
+      <label><input type="checkbox" data-type="group" checked> 集團</label>
+      <label><input type="checkbox" data-type="rival" checked> 競爭</label>
+    </div>
+  </header>
+
+  <main>
+    <aside class="legend">
+      <h2>產業別(點擊篩選)</h2>
+      <div id="sector-legend"></div>
+      <div class="legend-hint">再點一下取消;全部熄滅時視同全選。</div>
+      <div class="edge-legend">
+        <h2>關係線</h2>
+        <div class="row"><svg width="28" height="10"><line x1="0" y1="5" x2="22" y2="5" stroke="var(--s-fab)" stroke-width="1.8"/><path d="M22,5 l-5,-3 v6 z" fill="var(--s-fab)"/></svg>供應(→ 客戶)</div>
+        <div class="legend-hint" style="margin:0 0 4px">線色 = 供應方的產業色</div>
+        <div class="row"><svg width="28" height="10"><line x1="0" y1="5" x2="28" y2="5" stroke="currentColor" stroke-width="1.6" stroke-dasharray="5 3"/></svg>集團/持股</div>
+        <div class="row"><svg width="28" height="10"><line x1="0" y1="5" x2="28" y2="5" stroke="currentColor" stroke-width="1.6" stroke-dasharray="1.5 3"/></svg>競爭</div>
+      </div>
+    </aside>
+
+    <svg id="graph"></svg>
+
+    <aside class="panel" id="panel"></aside>
+
+    <div class="zoom-ctrl">
+      <button id="zoom-in" title="放大">+</button>
+      <button id="zoom-out" title="縮小">−</button>
+      <button id="zoom-fit" title="重設視角">⌂</button>
+    </div>
+  </main>
+
+  <footer>
+    <span>產業鏈檢視:左 = 上游、右 = 下游;節點大小 ≈ 公司規模;點選個股會亮起它的上下游並顯示流向。</span>
+    <span id="quote-status">報價載入中…</span>
+    <span>資料為公開資訊之人工整理,僅供研究參考,不構成投資建議。</span>
+  </footer>
+
+  <div id="tooltip"></div>
+  <script src="vendor/d3.v7.min.js"></script>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

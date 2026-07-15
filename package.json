@@ -1,0 +1,16 @@
+{
+  "name": "tw-stock-map",
+  "version": "1.0.0",
+  "description": "台灣科技股產業地圖 — 供應鏈/集團/競爭關係互動視覺化",
+  "type": "module",
+  "main": "server.js",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
