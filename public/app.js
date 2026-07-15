@@ -297,7 +297,7 @@
     const ty = topPad + availH / 2 - scale * (b.y + b.height / 2);
     svg.transition().duration(400).call(zoom.transform, d3.zoomIdentity.translate(tx, ty).scale(scale));
   }
-  setTimeout(fitView, 1300);
+  setTimeout(fitView, 2200); // 節點多,等佈局大致收斂再取景
 
   // ---------- 篩選狀態 ----------
   const state = {
