@@ -1,6 +1,28 @@
 {
-  "updated": "",
+  "updated": "2026-07-15",
   "source": "https://www.alphamemo.ai/free-transcripts",
-  "note": "僅索引標題/日期/連結,內容屬 AlphaMemo 所有;執行 npm run sync:transcripts 自動填入。",
-  "transcripts": {}
+  "note": "僅索引標題/日期/連結,內容屬 AlphaMemo 所有;連結開啟原站頁面。",
+  "transcripts": {
+    "2408": [
+      {
+        "date": "2026-07-10",
+        "title": "南亞科 2026Q3 法說會逐字稿",
+        "url": "https://www.alphamemo.ai/free-transcripts/2141c903-96ac-4126-acbb-078fc3d4126d"
+      }
+    ],
+    "3008": [
+      {
+        "date": "2026-07-09",
+        "title": "大立光 2026Q3 法說會逐字稿",
+        "url": "https://www.alphamemo.ai/free-transcripts/1aaf3095-d865-4dff-8a19-2f4e2a3b8f04"
+      }
+    ],
+    "6770": [
+      {
+        "date": "2026-07-14",
+        "title": "力積電 2026Q3 法說會逐字稿",
+        "url": "https://www.alphamemo.ai/free-transcripts/314b2758-4fea-434b-a976-e5784b45a903"
+      }
+    ]
+  }
 }

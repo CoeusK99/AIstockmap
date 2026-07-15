@@ -24,12 +24,13 @@ const OUT = path.join(ROOT, "public", "transcripts.json");
 const INDEX_URL = "https://www.alphamemo.ai/free-transcripts";
 const UUID = "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}";
 
-// --- 地圖上的台股(id + 名稱),供標題配對 ------------------------------------
+// --- 地圖上的節點(台股代號 + 海外代碼 + 名稱),供配對 ------------------------
 const dataJs = readFileSync(path.join(ROOT, "public", "data.js"), "utf8");
-const companies = [...dataJs.matchAll(/id:\s*"(\d{4})",\s*name:\s*"([^"]+)"/g)].map((m) => ({
+const companies = [...dataJs.matchAll(/id:\s*"([A-Z0-9]{1,5})",\s*name:\s*"([^"]+)"/g)].map((m) => ({
   code: m[1],
   name: m[2].replace(/-KY$/, ""), // 標題常省略 -KY 後綴
 }));
+const idSet = new Set(companies.map((c) => c.code));
 
 const decode = (s) =>
   s
@@ -73,7 +74,31 @@ async function main() {
     console.log(`已將頁面存至 ${DUMP}`);
   }
 
-  const found = new Map(); // uuid -> { title, context }
+  const found = new Map(); // uuid -> { title, context, code?, date? }
+
+  // 策略 0(精準):AlphaMemo 把逐字稿清單放在 Next.js 資料串流的結構化 JSON 裡
+  //   {"id":"<uuid>","stock_name":"大立光","stock_number":"3008",
+  //    "audio_date":"2026-07-09","market":"TW","fiscal_year":2026,"fiscal_quarter":2}
+  //   引號在串流中被跳脫成 \",先還原再逐物件抽欄位(容忍欄位順序變動)。
+  const unescaped = html.replace(/\\"/g, '"');
+  for (const m of unescaped.matchAll(/\{[^{}]*?"stock_number"[^{}]*?\}/g)) {
+    const chunk = m[0];
+    const uuid = (chunk.match(new RegExp(`"id"\\s*:\\s*"(${UUID})"`)) || [])[1];
+    if (!uuid) continue;
+    const get = (k) => decode((chunk.match(new RegExp(`"${k}"\\s*:\\s*"([^"]*)"`)) || [])[1] || "");
+    const getNum = (k) => (chunk.match(new RegExp(`"${k}"\\s*:\\s*(\\d+)`)) || [])[1] || "";
+    const name = get("stock_name");
+    const code = get("stock_number");
+    const fy = getNum("fiscal_year");
+    const fq = getNum("fiscal_quarter");
+    found.set(uuid, {
+      title: `${name}${fy && fq ? ` ${fy}Q${fq}` : ""} 法說會逐字稿`,
+      context: chunk,
+      code: idSet.has(code) ? code : "",
+      date: get("audio_date"),
+    });
+  }
+  console.log(`策略 0(結構化 JSON):${found.size} 筆`);
 
   // 策略 1:HTML 錨點 <a href="/free-transcripts/<uuid>">標題…</a>
   for (const m of html.matchAll(
@@ -114,20 +139,23 @@ async function main() {
     return;
   }
 
-  // --- 配對公司:標題含公司名或 (股號) ----------------------------------------
+  // --- 配對公司:優先用結構化的 stock_number,退而求其次比對標題 ----------------
   const byCode = {};
   const unmatched = [];
-  for (const [uuid, { title, context }] of found) {
+  for (const [uuid, entry] of found) {
+    const { title, context } = entry;
     const hay = `${title} ${context}`;
-    let code = "";
-    const codeM = hay.match(/[(（【\s](\d{4})[)）】\s]/);
-    if (codeM && companies.some((c) => c.code === codeM[1])) code = codeM[1];
+    let code = entry.code || "";
+    if (!code) {
+      const codeM = hay.match(/[(（【\s](\d{4})[)）】\s]/);
+      if (codeM && idSet.has(codeM[1])) code = codeM[1];
+    }
     if (!code) {
       const hit = companies.find((c) => hay.includes(c.name));
       if (hit) code = hit.code;
     }
     const item = {
-      date: findDate(hay),
+      date: entry.date || findDate(hay),
       title: title.slice(0, 120),
       url: `https://www.alphamemo.ai/free-transcripts/${uuid}`,
     };
