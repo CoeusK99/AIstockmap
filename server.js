@@ -94,6 +94,86 @@ app.get("/api/quotes", async (_req, res) => {
 });
 
 // -----------------------------------------------------------------------------
+// 基本面:EPS(綜合損益表)+ 本益比/殖利率/淨值比(每日估值)。
+// 欄位名稱可能隨資料集改版調整,一律用關鍵字比對;任一來源失敗不影響其他。
+// -----------------------------------------------------------------------------
+const EPS_SOURCES = [
+  "https://openapi.twse.com.tw/v1/opendata/t187ap06_L",          // 上市 綜合損益表(含每股盈餘)
+  "https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap06_O",       // 上櫃
+];
+const VAL_SOURCES = [
+  "https://openapi.twse.com.tw/v1/exchangeReport/BWIBBU_ALL",    // 上市 本益比/殖利率/淨值比
+  "https://www.tpex.org.tw/openapi/v1/tpex_mainboard_peratio_analysis", // 上櫃
+];
+const FUND_CACHE_MS = 12 * 60 * 60 * 1000;
+let fundCache = { at: 0, payload: null };
+
+const pickKey = (row, patterns) => {
+  for (const k of Object.keys(row)) {
+    if (patterns.some((p) => p.test(k))) {
+      const v = String(row[k] ?? "").trim();
+      if (v && v !== "-" && v !== "--") return v;
+    }
+  }
+  return "";
+};
+
+async function loadFundamentals() {
+  const fund = {};
+  const [epsResults, valResults] = await Promise.all([
+    Promise.allSettled(EPS_SOURCES.map(fetchJson)),
+    Promise.allSettled(VAL_SOURCES.map(fetchJson)),
+  ]);
+
+  for (const r of epsResults) {
+    if (r.status !== "fulfilled" || !Array.isArray(r.value)) continue;
+    for (const row of r.value) {
+      const code = pickKey(row, [/公司代號/, /^SecuritiesCompanyCode$/i, /^CompanyCode$/i, /^Code$/i]);
+      if (!TICKERS.has(code)) continue;
+      const eps = num(pickKey(row, [/基本每股盈餘/, /每股盈餘/, /EPS/i]));
+      if (eps == null) continue;
+      const year = pickKey(row, [/^年度$/, /year/i]);
+      const season = pickKey(row, [/^季別?$/, /season|quarter/i]);
+      const period = year && season ? `${year}Q${season}` : year || "";
+      const prev = fund[code];
+      // 同一公司若有多期資料,保留最新一期
+      if (!prev || !prev.period || period > prev.period) {
+        fund[code] = { ...(prev || {}), eps, period };
+      }
+    }
+  }
+  for (const r of valResults) {
+    if (r.status !== "fulfilled" || !Array.isArray(r.value)) continue;
+    for (const row of r.value) {
+      const code = pickKey(row, [/公司代號|股票代號/, /^SecuritiesCompanyCode$/i, /^Code$/i]);
+      if (!TICKERS.has(code)) continue;
+      const per = num(pickKey(row, [/本益比/, /PEratio|PriceEarning/i]));
+      const dyield = num(pickKey(row, [/殖利率/, /Yield/i]));
+      const pbr = num(pickKey(row, [/淨值比/, /PBratio|PriceBook/i]));
+      fund[code] = { ...(fund[code] || {}), per, dyield, pbr };
+    }
+  }
+  return { fundamentals: fund };
+}
+
+app.get("/api/fundamentals", async (_req, res) => {
+  const now = Date.now();
+  if (fundCache.payload && now - fundCache.at < FUND_CACHE_MS) {
+    return res.json(fundCache.payload);
+  }
+  try {
+    const payload = await loadFundamentals();
+    if (Object.keys(payload.fundamentals).length > 0) {
+      fundCache = { at: now, payload };
+    }
+    res.json(payload);
+  } catch (err) {
+    console.error("fundamentals fetch failed:", err.message);
+    res.json(fundCache.payload || { fundamentals: {} });
+  }
+});
+
+// -----------------------------------------------------------------------------
 // 法說會資訊:同步交易所開放資料(公司代號、日期、地點、訊息擇要、專區連結)。
 // 官方僅公告簡報與影音連結,並無逐字稿;欄位名稱可能隨資料集改版而調整,
 // 所以用關鍵字比對欄位、任何一個來源失敗都不影響其他來源。

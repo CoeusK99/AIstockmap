@@ -462,7 +462,7 @@
       nodes.find((n) => n.id.toLowerCase() === q || n.name.toLowerCase() === q) ||
       nodes.find((n) => n.id.toLowerCase().startsWith(q) || n.name.toLowerCase().includes(q)) ||
       // 也支援產品關鍵字(如「水冷」「載板」「BMC」)
-      nodes.find((n) => (n.products || []).some((p) => p.toLowerCase().includes(q)));
+      nodes.find((n) => (n.products || []).some((p) => p.name.toLowerCase().includes(q)));
     if (hit) {
       select(hit.id);
       centerOn(hit);
@@ -479,9 +479,10 @@
   // ---------- 報價 / 法說會 / 研究文件 ----------
   let quotes = {};
   let quoteDate = "";
-  let confs = {};        // 法說會:交易所開放資料(伺服器代理)
-  let docs = {};         // 研究文件:docs/<股號>/ 資料夾自動索引
-  let transcripts = {};  // AlphaMemo 逐字稿索引:scripts/sync-alphamemo.mjs 產生
+  let confs = {};         // 法說會:交易所開放資料(伺服器代理)
+  let docs = {};          // 研究文件:docs/<股號>/ 資料夾自動索引
+  let transcripts = {};   // AlphaMemo 逐字稿索引:scripts/sync-alphamemo.mjs 產生
+  let fundamentals = {};  // 基本面:EPS/本益比/殖利率(伺服器代理交易所開放資料)
   const quoteStatus = document.getElementById("quote-status");
 
   // 外部字串(API 資料、檔名)一律跳脫後才放進 innerHTML
@@ -502,6 +503,10 @@
   fetch("/transcripts.json")
     .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
     .then((d) => { transcripts = d.transcripts || {}; rerenderPanel(); })
+    .catch(() => {});
+  fetch("/api/fundamentals")
+    .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
+    .then((d) => { fundamentals = d.fundamentals || {}; rerenderPanel(); })
     .catch(() => {});
 
   fetch("/api/quotes")
@@ -561,7 +566,7 @@
     tooltip.innerHTML = `
       <div class="t-name">${d.name} <span class="t-sub">${d.market === "foreign" ? "" : d.id}</span></div>
       <div class="t-sub">${sectorById.get(d.sector).name}${d.tags?.length ? " · " + d.tags.join("、") : ""}</div>
-      ${d.products?.length ? `<div>${d.products.slice(0, 3).join("、")}${d.products.length > 3 ? "…" : ""}</div>` : ""}
+      ${d.products?.length ? `<div>${d.products.slice(0, 3).map((p) => p.name).join("、")}${d.products.length > 3 ? "…" : ""}</div>` : ""}
       ${q ? `<div>收盤 ${q.close} <span style="color:var(--quote-${q.cls || "up"})">${q.text}</span></div>` : ""}
       <div class="t-sub">點擊看詳細關係</div>`;
     tooltip.style.display = "block";
@@ -633,10 +638,35 @@
           .join("")
       : "";
 
-    // 主要產品線
+    // 主要產品線:有佔比的畫長條(由大到小),沒有的以標籤呈現
+    const withShare = (n.products || []).filter((p) => p.share != null).sort((a, b) => b.share - a.share);
+    const noShare = (n.products || []).filter((p) => p.share == null);
     const prodBlock = (n.products || []).length
-      ? `<h3>主要產品</h3><div class="prod-chips">${n.products.map((p) => `<span class="prod">${esc(p)}</span>`).join("")}</div>`
+      ? `<h3>主要產品${withShare.length ? "・約略營收佔比" : ""}</h3>` +
+        withShare
+          .map(
+            (p) =>
+              `<div class="prod-row">
+                 <div class="prod-bar" style="width:${Math.min(100, p.share)}%;background:var(--s-${n.sector})"></div>
+                 <span class="prod-name">${esc(p.name)}</span><span class="prod-share">${p.share}%</span>
+               </div>`
+          )
+          .join("") +
+        (noShare.length ? `<div class="prod-chips">${noShare.map((p) => `<span class="prod">${esc(p.name)}</span>`).join("")}</div>` : "") +
+        (withShare.length ? `<div class="doc-hint" style="margin-top:4px">佔比為公開資訊之約略整理,未必加總 100%。</div>` : "")
       : "";
+
+    // 基本面:EPS / 本益比 / 殖利率(交易所開放資料)
+    const f = fundamentals[n.id];
+    const fundBlock =
+      f && (f.eps != null || f.per != null)
+        ? `<div class="fund">
+             ${f.eps != null ? `<span>EPS ${f.eps} 元${f.period ? `<i>(${esc(f.period)} 累計)</i>` : ""}</span>` : ""}
+             ${f.per != null ? `<span>本益比 ${f.per}</span>` : ""}
+             ${f.dyield != null ? `<span>殖利率 ${f.dyield}%</span>` : ""}
+             ${f.pbr != null ? `<span>淨值比 ${f.pbr}</span>` : ""}
+           </div>`
+        : "";
 
     // 逐字稿來源:AlphaMemo 免費逐字稿(固定入口 + 個股站內搜尋)
     const transcriptLinks =
@@ -690,6 +720,7 @@
           : ""
       }
       <p class="desc">${n.desc}</p>
+      ${fundBlock}
       ${prodBlock}
       ${confBlock}
       ${docBlock}
