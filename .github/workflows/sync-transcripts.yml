@@ -18,10 +18,19 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "24"
 
       - name: Sync transcripts index
-        run: node scripts/sync-alphamemo.mjs
+        run: node scripts/sync-alphamemo.mjs --dump /tmp/alphamemo-index.html
+
+      # 解析失敗時把抓到的頁面上傳,方便診斷網站結構
+      - name: Upload fetched page for diagnosis
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: alphamemo-index
+          path: /tmp/alphamemo-index.html
+          retention-days: 3
 
       - name: Commit if changed
         run: |

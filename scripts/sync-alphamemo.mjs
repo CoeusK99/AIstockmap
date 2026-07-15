@@ -44,18 +44,34 @@ const findDate = (s) => {
   return q ? q[0].replace(/\s/g, "") : "";
 };
 
+// CLI:--from <file> 用另存的 HTML 離線解析;--dump <file> 把抓到的 HTML 存檔(診斷用)
+const args = process.argv.slice(2);
+const argVal = (flag) => (args.includes(flag) ? args[args.indexOf(flag) + 1] : "");
+const FROM = argVal("--from") || (args[0] && !args[0].startsWith("--") ? args[0] : "");
+const DUMP = argVal("--dump");
+
 async function main() {
-  console.log(`抓取索引頁 ${INDEX_URL} …`);
-  const res = await fetch(INDEX_URL, {
-    signal: AbortSignal.timeout(30000),
-    headers: {
-      "user-agent": "Mozilla/5.0 (compatible; AIstockmap-sync/1.0; +https://github.com/CoeusK99/AIstockmap)",
-      accept: "text/html,application/xhtml+xml",
-    },
-  });
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  const html = await res.text();
+  let html;
+  if (FROM) {
+    console.log(`離線解析 ${FROM} …`);
+    html = readFileSync(FROM, "utf8");
+  } else {
+    console.log(`抓取索引頁 ${INDEX_URL} …`);
+    const res = await fetch(INDEX_URL, {
+      signal: AbortSignal.timeout(30000),
+      headers: {
+        "user-agent": "Mozilla/5.0 (compatible; AIstockmap-sync/1.0; +https://github.com/CoeusK99/AIstockmap)",
+        accept: "text/html,application/xhtml+xml",
+      },
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    html = await res.text();
+  }
   console.log(`頁面大小 ${(html.length / 1024).toFixed(0)} KB`);
+  if (DUMP) {
+    writeFileSync(DUMP, html);
+    console.log(`已將頁面存至 ${DUMP}`);
+  }
 
   const found = new Map(); // uuid -> { title, context }
 
@@ -147,12 +163,6 @@ async function main() {
     console.log(`未能配對到地圖個股的 ${unmatched.length} 篇(非地圖成分股或標題無法辨識):`);
     unmatched.slice(0, 15).forEach((u) => console.log(`  - ${u.title}`));
   }
-}
-
-// 支援離線模式:node scripts/sync-alphamemo.mjs saved.html(用另存的 HTML 解析)
-if (process.argv[2]) {
-  const html = readFileSync(process.argv[2], "utf8");
-  globalThis.fetch = async () => new Response(html, { status: 200 });
 }
 
 main().catch((err) => {
