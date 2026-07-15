@@ -535,12 +535,22 @@
           .join("")
       : "";
 
+    // 逐字稿來源:AlphaMemo 免費逐字稿(固定入口 + 個股站內搜尋)
+    const transcriptLinks =
+      n.market === "foreign"
+        ? ""
+        : `<div class="ext-links" style="margin-bottom:8px">
+             <a href="https://www.alphamemo.ai/free-transcripts" target="_blank" rel="noopener">AlphaMemo 逐字稿庫</a>
+             <a href="https://www.google.com/search?q=${encodeURIComponent(`site:alphamemo.ai ${n.name} 法說會`)}" target="_blank" rel="noopener">找 ${esc(n.name)} 的逐字稿</a>
+           </div>`;
+
     // 研究文件(docs/<股號>/ 內的逐字稿、券商報告、簡報等)
     const docItems = docs[n.id] || [];
     const docBlock =
       n.market === "foreign" && !docItems.length
         ? ""
         : `<h3>研究文件${docItems.length ? `(${docItems.length})` : ""}</h3>` +
+          transcriptLinks +
           (docItems.length
             ? docItems
                 .map(
