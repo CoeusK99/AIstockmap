@@ -389,7 +389,9 @@
     const hit =
       nodes.find((n) => `${n.id} ${n.name}`.toLowerCase() === q) ||
       nodes.find((n) => n.id.toLowerCase() === q || n.name.toLowerCase() === q) ||
-      nodes.find((n) => n.id.toLowerCase().startsWith(q) || n.name.toLowerCase().includes(q));
+      nodes.find((n) => n.id.toLowerCase().startsWith(q) || n.name.toLowerCase().includes(q)) ||
+      // 也支援產品關鍵字(如「水冷」「載板」「BMC」)
+      nodes.find((n) => (n.products || []).some((p) => p.toLowerCase().includes(q)));
     if (hit) {
       select(hit.id);
       centerOn(hit);
@@ -469,6 +471,7 @@
     tooltip.innerHTML = `
       <div class="t-name">${d.name} <span class="t-sub">${d.market === "foreign" ? "" : d.id}</span></div>
       <div class="t-sub">${sectorById.get(d.sector).name}${d.tags?.length ? " · " + d.tags.join("、") : ""}</div>
+      ${d.products?.length ? `<div>${d.products.slice(0, 3).join("、")}${d.products.length > 3 ? "…" : ""}</div>` : ""}
       ${q ? `<div>收盤 ${q.close} <span style="color:var(--quote-${q.cls || "up"})">${q.text}</span></div>` : ""}
       <div class="t-sub">點擊看詳細關係</div>`;
     tooltip.style.display = "block";
@@ -540,6 +543,11 @@
           .join("")
       : "";
 
+    // 主要產品線
+    const prodBlock = (n.products || []).length
+      ? `<h3>主要產品</h3><div class="prod-chips">${n.products.map((p) => `<span class="prod">${esc(p)}</span>`).join("")}</div>`
+      : "";
+
     // 逐字稿來源:AlphaMemo 免費逐字稿(固定入口 + 個股站內搜尋)
     const transcriptLinks =
       n.market === "foreign"
@@ -592,6 +600,7 @@
           : ""
       }
       <p class="desc">${n.desc}</p>
+      ${prodBlock}
       ${confBlock}
       ${docBlock}
       ${relBlock("上游供應商", rel.up, "←")}
