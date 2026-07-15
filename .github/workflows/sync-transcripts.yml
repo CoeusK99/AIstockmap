@@ -1,0 +1,36 @@
+# 每週自動同步 AlphaMemo 免費逐字稿索引到 public/transcripts.json
+# (只索引標題/日期/連結,不抓內文;也可到 Actions 頁面手動觸發)
+name: Sync AlphaMemo transcripts
+
+on:
+  schedule:
+    - cron: "30 22 * * 0"   # 每週一 06:30 台北時間(UTC+8)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Sync transcripts index
+        run: node scripts/sync-alphamemo.mjs
+
+      - name: Commit if changed
+        run: |
+          if git diff --quiet public/transcripts.json; then
+            echo "索引無變化,略過提交"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/transcripts.json
+          git commit -m "chore: 同步 AlphaMemo 逐字稿索引"
+          git push

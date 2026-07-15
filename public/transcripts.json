@@ -1,0 +1,6 @@
+{
+  "updated": "",
+  "source": "https://www.alphamemo.ai/free-transcripts",
+  "note": "僅索引標題/日期/連結,內容屬 AlphaMemo 所有;執行 npm run sync:transcripts 自動填入。",
+  "transcripts": {}
+}

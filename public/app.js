@@ -406,8 +406,9 @@
   // ---------- 報價 / 法說會 / 研究文件 ----------
   let quotes = {};
   let quoteDate = "";
-  let confs = {};   // 法說會:交易所開放資料(伺服器代理)
-  let docs = {};    // 研究文件:docs/<股號>/ 資料夾自動索引
+  let confs = {};        // 法說會:交易所開放資料(伺服器代理)
+  let docs = {};         // 研究文件:docs/<股號>/ 資料夾自動索引
+  let transcripts = {};  // AlphaMemo 逐字稿索引:scripts/sync-alphamemo.mjs 產生
   const quoteStatus = document.getElementById("quote-status");
 
   // 外部字串(API 資料、檔名)一律跳脫後才放進 innerHTML
@@ -424,6 +425,10 @@
   fetch("/api/docs")
     .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
     .then((d) => { docs = d.docs || {}; rerenderPanel(); })
+    .catch(() => {});
+  fetch("/transcripts.json")
+    .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
+    .then((d) => { transcripts = d.transcripts || {}; rerenderPanel(); })
     .catch(() => {});
 
   fetch("/api/quotes")
@@ -544,8 +549,9 @@
              <a href="https://www.google.com/search?q=${encodeURIComponent(`site:alphamemo.ai ${n.name} 法說會`)}" target="_blank" rel="noopener">找 ${esc(n.name)} 的逐字稿</a>
            </div>`;
 
-    // 研究文件(docs/<股號>/ 內的逐字稿、券商報告、簡報等)
-    const docItems = docs[n.id] || [];
+    // 研究文件 = AlphaMemo 逐字稿索引 + docs/<股號>/ 內的自有檔案
+    const tsItems = (transcripts[n.id] || []).map((t) => ({ ...t, type: "逐字稿", external: true }));
+    const docItems = [...tsItems, ...(docs[n.id] || [])];
     const docBlock =
       n.market === "foreign" && !docItems.length
         ? ""
@@ -556,7 +562,7 @@
                 .map(
                   (d) =>
                     `<a class="rel-item" href="${esc(d.url)}" target="_blank" rel="noopener">
-                       <span class="who"><span class="doc-type">${esc(d.type)}</span>${esc(d.title)}</span>
+                       <span class="who"><span class="doc-type">${esc(d.type)}</span>${esc(d.title)}${d.external ? " ↗" : ""}</span>
                        ${d.date ? `<span class="what">${esc(d.date)}</span>` : ""}
                      </a>`
                 )

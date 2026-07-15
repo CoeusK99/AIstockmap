@@ -21,8 +21,12 @@
   (台股慣例紅漲綠跌);抓不到時自動退化成純地圖模式
 - **法說會資訊**:自動同步交易所開放資料(日期、訊息擇要、專區連結)到個股面板
 - **研究文件庫**:把法說會逐字稿、券商報告等檔案放進 `docs/<股號>/`,
-  面板自動建立索引與下載連結(詳見 `docs/README.md`;逐字稿與券商報告
+  面板自動建立索引與下載連結(詳見 `docs/README.md`;券商報告有版權、
   無公開 API,需自行放入)
+- **AlphaMemo 逐字稿索引**:`npm run sync:transcripts` 解析
+  [AlphaMemo 免費逐字稿](https://www.alphamemo.ai/free-transcripts)索引頁、
+  依公司自動配對寫入 `public/transcripts.json`,面板直接列出該股逐字稿連結;
+  附 GitHub Actions 每週自動同步(`.github/workflows/sync-transcripts.yml`)
 - **外部資源**:每檔個股一鍵連到 MOPS、財報狗、Goodinfo、Yahoo 股市
 - **深色模式**:跟隨系統主題;節點依供應鏈上游→下游大致由左至右分布
 

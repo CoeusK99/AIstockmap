@@ -26,9 +26,12 @@ docs/
 ## 逐字稿哪裡找?
 
 - **AlphaMemo 免費逐字稿**:<https://www.alphamemo.ai/free-transcripts>
-  提供台股法說會逐字稿;個股面板的「研究文件」區已內建入口連結與
-  個股站內搜尋。找到後可下載/整理成 PDF 或 Markdown 放進 `docs/<股號>/`,
-  建議在檔案內註明出處。
+  - **自動索引**:執行 `npm run sync:transcripts`(或等 GitHub Actions 每週自動跑),
+    會解析索引頁、依公司自動配對,寫入 `public/transcripts.json`,
+    個股面板「研究文件」就會直接列出該股的逐字稿連結(開啟 AlphaMemo 原站)。
+    AlphaMemo 的網址是不透明 UUID(如 `/free-transcripts/9fa1db9a-…`),
+    無法從股號推導,所以需要這個索引步驟。
+  - 想離線收藏的話,下載/整理成 PDF 放進 `docs/<股號>/`,並註明出處。
 - **MOPS 法說會專區**:官方簡報檔與影音連結(面板「法說會」區會自動同步場次)。
 
 ## 為什麼不自動下載?
