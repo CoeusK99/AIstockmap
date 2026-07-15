@@ -265,6 +265,7 @@
       <label><input type="checkbox" data-type="supply" checked> 供應鏈</label>
       <label><input type="checkbox" data-type="group" checked> 集團</label>
       <label><input type="checkbox" data-type="rival" checked> 競爭</label>
+      <label title="點選個股時,沿供應線遞迴點亮整條上下游產業鏈"><input type="checkbox" id="chain-mode"> 全鏈追蹤</label>
     </div>
   </header>
 
@@ -279,6 +280,8 @@
         <div class="legend-hint" style="margin:0 0 4px">線色 = 供應方的產業色</div>
         <div class="row"><svg width="28" height="10"><line x1="0" y1="5" x2="28" y2="5" stroke="currentColor" stroke-width="1.6" stroke-dasharray="5 3"/></svg>集團/持股</div>
         <div class="row"><svg width="28" height="10"><line x1="0" y1="5" x2="28" y2="5" stroke="currentColor" stroke-width="1.6" stroke-dasharray="1.5 3"/></svg>競爭</div>
+        <div class="row"><svg width="28" height="14"><circle cx="14" cy="7" r="4" fill="var(--text-muted)"/><circle cx="14" cy="7" r="6.5" fill="none" stroke="var(--quote-up)" stroke-width="2"/></svg>光環 = 當日漲跌</div>
+        <div class="legend-hint" style="margin:0">紅漲綠跌,幅度越大越明顯。</div>
       </div>
     </aside>
 

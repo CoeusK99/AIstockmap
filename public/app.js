@@ -148,6 +148,15 @@
       sim.alpha(0.3).restart();
     });
 
+  // 行情光環:報價載入後顯示,紅漲綠跌(台股慣例),幅度越大越明顯
+  nodeSel
+    .append("circle")
+    .attr("class", "qring")
+    .attr("r", (d) => r(d) + 3.5)
+    .style("fill", "none")
+    .style("stroke-width", 2.5)
+    .style("display", "none");
+
   nodeSel.append("circle").attr("r", (d) => r(d)).style("fill", (d) => `var(--s-${d.sector})`);
   nodeSel
     .append("text")
@@ -305,7 +314,35 @@
     tags: new Set(),
     edges: new Set(["supply", "group", "rival"]),
     selected: null,
+    chain: false, // 全鏈追蹤:沿供應線遞迴點亮整條上下游
   };
+
+  // 供應鏈鄰接表(上游/下游),供全鏈追蹤遍歷
+  let upAdj = null;
+  let downAdj = null;
+  function buildAdj() {
+    upAdj = {};
+    downAdj = {};
+    simLinks.forEach((l) => {
+      if (l.type !== "supply") return;
+      (downAdj[l.source.id] ||= []).push(l.target.id);
+      (upAdj[l.target.id] ||= []).push(l.source.id);
+    });
+  }
+  function walk(start, adj) {
+    const out = new Set();
+    const stack = [start];
+    while (stack.length) {
+      const x = stack.pop();
+      for (const y of adj[x] || []) {
+        if (!out.has(y)) {
+          out.add(y);
+          stack.push(y);
+        }
+      }
+    }
+    return out;
+  }
 
   const nodeVisible = (n) => {
     const bySector = state.sectors.size === 0 || state.sectors.has(n.sector);
@@ -315,22 +352,56 @@
   const linkVisible = (l) => state.edges.has(l.type) && nodeVisible(l.source) && nodeVisible(l.target);
 
   function applyFilters() {
+    const sel = state.selected;
     const neighbors = new Set();
-    if (state.selected) {
-      neighbors.add(state.selected);
-      simLinks.forEach((l) => {
-        if (!state.edges.has(l.type)) return;
-        if (l.source.id === state.selected) neighbors.add(l.target.id);
-        if (l.target.id === state.selected) neighbors.add(l.source.id);
-      });
+    let chainUp = null;
+    let chainDown = null;
+
+    if (sel) {
+      neighbors.add(sel);
+      if (state.chain) {
+        // 全鏈追蹤:沿供應線遞迴收集所有上游與下游
+        if (!upAdj) buildAdj();
+        chainUp = walk(sel, upAdj);
+        chainDown = walk(sel, downAdj);
+        chainUp.forEach((id) => neighbors.add(id));
+        chainDown.forEach((id) => neighbors.add(id));
+      } else {
+        simLinks.forEach((l) => {
+          if (!state.edges.has(l.type)) return;
+          if (l.source.id === sel) neighbors.add(l.target.id);
+          if (l.target.id === sel) neighbors.add(l.source.id);
+        });
+      }
     }
+
+    // 一條供應線是否在選取個股的鏈路上(兩端同在上游側或同在下游側)
+    const onChain = (l) => {
+      if (l.type !== "supply") return false;
+      const s = l.source.id;
+      const t = l.target.id;
+      const upSide = (chainUp.has(s) || s === sel) && (chainUp.has(t) || t === sel);
+      const downSide = (chainDown.has(s) || s === sel) && (chainDown.has(t) || t === sel);
+      return upSide || downSide;
+    };
+
     nodeSel
-      .classed("faded", (d) => !nodeVisible(d) || (state.selected && !neighbors.has(d.id)))
-      .classed("sel", (d) => d.id === state.selected);
+      .classed("faded", (d) => !nodeVisible(d) || (sel && !neighbors.has(d.id)))
+      .classed("sel", (d) => d.id === sel);
     linkG
-      .classed("faded", (d) => !linkVisible(d) || (state.selected && d.source.id !== state.selected && d.target.id !== state.selected))
-      .classed("hl", (d) => state.selected && (d.source.id === state.selected || d.target.id === state.selected) && linkVisible(d));
+      .classed("faded", (d) =>
+        !linkVisible(d) ||
+        (sel && (state.chain ? !onChain(d) : d.source.id !== sel && d.target.id !== sel))
+      )
+      .classed("hl", (d) =>
+        sel && linkVisible(d) && (state.chain ? onChain(d) : d.source.id === sel || d.target.id === sel)
+      );
   }
+
+  document.getElementById("chain-mode").onchange = (ev) => {
+    state.chain = ev.target.checked;
+    applyFilters();
+  };
 
   // ---------- 產業圖例 ----------
   const legendBox = document.getElementById("sector-legend");
@@ -367,7 +438,7 @@
   });
 
   // ---------- 關係線開關 ----------
-  document.querySelectorAll("#edge-toggles input").forEach((cb) => {
+  document.querySelectorAll("#edge-toggles input[data-type]").forEach((cb) => {
     cb.onchange = () => {
       if (cb.checked) state.edges.add(cb.dataset.type);
       else state.edges.delete(cb.dataset.type);
@@ -440,11 +511,30 @@
       quoteDate = data.date || "";
       const got = Object.keys(quotes).length;
       quoteStatus.textContent = got ? `收盤報價:${quoteDate}(台股慣例 紅漲綠跌)` : "尚無報價資料";
+      applyQuoteRings();
       if (state.selected) renderPanel(nodeById.get(state.selected));
     })
     .catch(() => {
       quoteStatus.textContent = "報價未載入(離線/靜態模式,地圖功能不受影響)";
     });
+
+  // 節點外圈光環:紅漲綠跌,漲跌幅越大越不透明(±5% 封頂)
+  function applyQuoteRings() {
+    nodeSel
+      .select(".qring")
+      .style("display", (d) => {
+        const q = quotes[d.id];
+        return q && q.close != null && q.change ? null : "none";
+      })
+      .style("stroke", (d) => ((quotes[d.id]?.change || 0) > 0 ? "var(--quote-up)" : "var(--quote-down)"))
+      .style("opacity", (d) => {
+        const q = quotes[d.id];
+        if (!q?.close) return 0;
+        const base = q.close - (q.change || 0);
+        const pct = base ? Math.abs((q.change / base) * 100) : 0;
+        return Math.min(1, 0.3 + (pct / 5) * 0.7);
+      });
+  }
 
   const fmtQuote = (id) => {
     const q = quotes[id];
