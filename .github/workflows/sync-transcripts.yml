@@ -6,6 +6,11 @@ on:
   schedule:
     - cron: "30 22 * * 0"   # 每週一 06:30 台北時間(UTC+8)
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/sync-alphamemo.mjs"   # 解析器更新時立即重新同步
+      - ".github/workflows/sync-transcripts.yml"
 
 permissions:
   contents: write
