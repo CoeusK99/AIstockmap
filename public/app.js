@@ -76,6 +76,7 @@
     #graph .link { fill: none; stroke-width: 1.5; stroke: var(--baseline); }
     #graph .link.supply { opacity: 0.55; }
     #graph .link.group { stroke-dasharray: 6 3; stroke-width: 1.8; }
+    #graph .link.cross { stroke-dasharray: 9 3 2 3; stroke-width: 2; stroke: var(--text-secondary); }
     #graph .link.rival { stroke-dasharray: 1.5 4; }
     #graph g.hl .link { stroke-width: 2.6; opacity: 1; }
     #graph g.hl .link.supply { stroke-dasharray: 7 4; animation: flow 0.5s linear infinite; }
@@ -312,7 +313,7 @@
   const state = {
     sectors: new Set(),
     tags: new Set(),
-    edges: new Set(["supply", "group", "rival"]),
+    edges: new Set(["supply", "group", "cross", "rival"]),
     selected: null,
     chain: false, // 全鏈追蹤:沿供應線遞迴點亮整條上下游
   };
@@ -440,8 +441,9 @@
   // ---------- 關係線開關 ----------
   document.querySelectorAll("#edge-toggles input[data-type]").forEach((cb) => {
     cb.onchange = () => {
-      if (cb.checked) state.edges.add(cb.dataset.type);
-      else state.edges.delete(cb.dataset.type);
+      // 「集團」開關同時控制單向持股(group)與互相持股(cross)
+      const types = cb.dataset.type === "group" ? ["group", "cross"] : [cb.dataset.type];
+      types.forEach((t) => (cb.checked ? state.edges.add(t) : state.edges.delete(t)));
       applyFilters();
     };
   });
@@ -578,7 +580,7 @@
     moveTip(ev);
   }
   function showLinkTip(ev, d) {
-    const arrow = d.type === "supply" ? " → " : " ↔ ";
+    const arrow = d.type === "supply" ? " → " : d.type === "cross" ? " ⇄ " : " ↔ ";
     tooltip.innerHTML = `
       <div class="t-name">${d.source.name}${arrow}${d.target.name}</div>
       <div>${d.label || ""}</div>`;
@@ -604,7 +606,7 @@
   }
 
   function renderPanel(n) {
-    const rel = { down: [], up: [], group: [], rival: [] };
+    const rel = { down: [], up: [], group: [], cross: [], rival: [] };
     simLinks.forEach((l) => {
       if (l.source.id === n.id) {
         if (l.type === "supply") rel.down.push({ other: l.target, label: l.label });
@@ -749,6 +751,7 @@
       ${relBlock("上游供應商", rel.up, "←")}
       ${relBlock("下游客戶", rel.down, "→")}
       ${relBlock("集團/持股", rel.group, "")}
+      ${relBlock("互相持股", rel.cross, "")}
       ${relBlock("競爭對手", rel.rival, "")}
       ${rumorBlock}
       ${extBlock}

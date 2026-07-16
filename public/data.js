@@ -13,7 +13,8 @@
 //         desc    = 一~兩句公司定位
 //
 // links:  type    = supply 供應(有向:source 供應 target)
-//                   group  集團/持股(無向)
+//                   group  集團/持股(無向,單向持股或集團淵源)
+//                   cross  互相持股(無向,雙方相互持有股權的策略聯盟)
 //                   rival  競爭(無向)
 //         label   = 關係說明
 // =============================================================================
@@ -376,6 +377,17 @@ const LINKS = [
   { source: "2317", target: "6414", type: "group", label: "樺漢屬鴻海集團" },
   { source: "2324", target: "3596", type: "group", label: "仁寶為智易大股東" },
   { source: "2303", target: "3035", type: "group", label: "智原自聯電分拆(聯家軍)" },
+  { source: "3702", target: "3036", type: "group", label: "大聯大公開收購取得文曄約兩成股權(2019)" },
+  { source: "6770", target: "8299", type: "group", label: "力晶集團早期投資群聯,策略合作緊密" },
+  { source: "2303", target: "3037", type: "group", label: "欣興屬聯電集團" },
+  { source: "2303", target: "3227", type: "group", label: "原相自聯電體系分拆(聯家軍)" },
+  { source: "2324", target: "2368", type: "group", label: "金像電與仁寶同屬金仁寶集團" },
+  { source: "2353", target: "3231", type: "group", label: "緯創自宏碁分家(2001)" },
+  { source: "2357", target: "4938", type: "group", label: "和碩自華碩分家(2008)" },
+
+  // --- 互相持股(雙向策略聯盟)--------------------------------------------------
+  { source: "3036", target: "5269", type: "cross", label: "文曄與祥碩相互私募結盟(2020),雙方互相持股" },
+  { source: "2303", target: "6147", type: "cross", label: "聯電與頎邦策略聯盟(2021),相互持股" },
 
   // --- 競爭關係 ---------------------------------------------------------------
   { source: "2330", target: "2303", type: "rival", label: "晶圓代工競爭(先進 vs 成熟製程)" },
