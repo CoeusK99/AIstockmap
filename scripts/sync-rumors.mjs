@@ -36,11 +36,12 @@ const argVal = (flag) => (args.includes(flag) ? args[args.indexOf(flag) + 1] : "
 const FROM_PTT = argVal("--from-ptt");
 const DUMP = argVal("--dump");
 
-// --- 地圖個股(代號 + 名稱)---------------------------------------------------
+// --- 地圖個股(代號 + 名稱 + 市場)---------------------------------------------
 const dataJs = readFileSync(path.join(ROOT, "public", "data.js"), "utf8");
-const companies = [...dataJs.matchAll(/id:\s*"([A-Z0-9]{1,5})",\s*name:\s*"([^"]+)"/g)].map((m) => ({
+const companies = [...dataJs.matchAll(/id:\s*"([A-Z0-9]{1,5})",\s*name:\s*"([^"]+)",\s*sector:\s*"[^"]+",\s*tier:\s*\d+,\s*market:\s*"(\w+)"/g)].map((m) => ({
   code: m[1],
   name: m[2].replace(/-KY$/, ""),
+  market: m[3],
 }));
 const idSet = new Set(companies.map((c) => c.code));
 
@@ -148,6 +149,50 @@ async function fetchPtt() {
   return byCode;
 }
 
+// --- Yahoo 奇摩股市 個股新聞 RSS(免費、雲端可達)--------------------------------
+// PTT 會擋雲端機房 IP(GitHub Actions 抓不到),Yahoo RSS 是同樣「大家都在看」
+// 且排程環境一定通的來源。批次帶多個代號,新聞標題再用比對機制歸戶。
+const YAHOO_BATCH = 15;
+async function fetchYahoo() {
+  const symbols = companies
+    .filter((c) => /^\d{4}$/.test(c.code))
+    .map((c) => `${c.code}.${c.market === "tpex" ? "TWO" : "TW"}`);
+  const byCode = {};
+  const seen = new Set();
+  for (let i = 0; i < symbols.length; i += YAHOO_BATCH) {
+    const batch = symbols.slice(i, i + YAHOO_BATCH).join(",");
+    try {
+      const res = await fetch(
+        `https://feeds.finance.yahoo.com/rss/2.0/headline?s=${encodeURIComponent(batch)}&region=TW&lang=zh-TW`,
+        { signal: AbortSignal.timeout(20000), headers: { "user-agent": UA } }
+      );
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const xml = await res.text();
+      for (const m of xml.matchAll(/<item>([\s\S]*?)<\/item>/g)) {
+        const item = m[1];
+        const title = decode(((item.match(/<title>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?<\/title>/) || [])[1] || "").trim());
+        const link = decode(((item.match(/<link>([\s\S]*?)<\/link>/) || [])[1] || "").trim());
+        const pub = ((item.match(/<pubDate>([\s\S]*?)<\/pubDate>/) || [])[1] || "").trim();
+        if (!title || !link || seen.has(link)) continue;
+        seen.add(link);
+        const codes = matchStocks(title);
+        if (!codes.length) continue;
+        const d = new Date(pub);
+        const date = isNaN(d) ? "" : d.toISOString().slice(0, 10);
+        for (const code of codes) {
+          (byCode[code] ||= []).push({ date, source: "Yahoo", author: "Yahoo 股市新聞", text: title.slice(0, 160), heat: "", url: link });
+        }
+      }
+    } catch (err) {
+      console.error(`Yahoo RSS 批次 ${i / YAHOO_BATCH + 1} 失敗:${err.message}`);
+    }
+    await sleep(500);
+  }
+  const total = Object.values(byCode).reduce((n, l) => n + l.length, 0);
+  console.log(`Yahoo:歸戶 ${Object.keys(byCode).length} 檔、${total} 則新聞`);
+  return byCode;
+}
+
 // --- X KOL(選配)---------------------------------------------------------------
 async function fetchX() {
   const TOKEN = process.env.X_BEARER_TOKEN || "";
@@ -203,11 +248,12 @@ async function fetchX() {
 
 // --- 主流程 ----------------------------------------------------------------------
 async function main() {
-  const results = await Promise.allSettled([fetchPtt(), fetchX()]);
+  const results = await Promise.allSettled([fetchPtt(), fetchYahoo(), fetchX()]);
   const byCode = {};
   for (const r of results) {
     if (r.status !== "fulfilled") {
-      console.error("來源失敗:", r.reason?.message || r.reason);
+      const cause = r.reason?.cause?.code || r.reason?.cause?.message || "";
+      console.error("來源失敗:", r.reason?.message || r.reason, cause ? `(${cause})` : "");
       continue;
     }
     for (const [code, items] of Object.entries(r.value)) {
@@ -240,7 +286,7 @@ async function main() {
     JSON.stringify(
       {
         updated: new Date().toISOString().slice(0, 10),
-        sources: ["PTT 股票板", "X KOL(選配)"],
+        sources: ["PTT 股票板", "Yahoo 股市新聞", "X KOL(選配)"],
         note: "公開討論之索引(標題/摘錄/連結),內容未經證實,僅供參考,非投資建議。",
         rumors: merged,
       },
