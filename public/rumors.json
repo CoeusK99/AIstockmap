@@ -1,6 +1,180 @@
 {
-  "updated": "",
-  "sources": ["PTT 股票板", "鉅亨網台股新聞", "Yahoo 股市新聞", "X KOL(選配)"],
-  "note": "公開討論之索引(標題/摘錄/連結),內容未經證實,僅供參考,非投資建議。由 npm run sync:rumors 產生。",
-  "rumors": {}
+  "updated": "2026-07-16",
+  "sources": [
+    "PTT 股票板",
+    "鉅亨網台股新聞",
+    "Yahoo 股市新聞",
+    "X KOL(選配)"
+  ],
+  "note": "公開討論之索引(標題/摘錄/連結),內容未經證實,僅供參考,非投資建議。",
+  "rumors": {
+    "2303": [
+      {
+        "date": "2026-07-15",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "處置股新增華新科等3檔被關至7/29 聯電明起出關今飆漲停",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6536078"
+      },
+      {
+        "date": "2026-07-15",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "〈台股盤前要聞〉聯電出關前夕飆漲停、上半年13金控狂賺4408億元、創新板誕下二千金",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6536206"
+      }
+    ],
+    "2317": [
+      {
+        "date": "2026-07-15",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "鴻海2.9億元取得Churchill Capital Corp XI股權 推進人形機器人投資",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6536069"
+      }
+    ],
+    "2330": [
+      {
+        "date": "2026-07-16",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "The Information：ASML計劃調高曝光機價格 台積電反對",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6536302"
+      },
+      {
+        "date": "2026-07-16",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "〈台股開盤〉台積電法說倒數股價弱 指數跌逾600點打4萬5保衛戰",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6536519"
+      }
+    ],
+    "2356": [
+      {
+        "date": "2026-07-16",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "〈焦點股〉電子五哥緯創、英業達相繼貼息 廣達除息秀沒漲聲跌逾4%",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6536550"
+      }
+    ],
+    "2382": [
+      {
+        "date": "2026-07-16",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "〈焦點股〉電子五哥緯創、英業達相繼貼息 廣達除息秀沒漲聲跌逾4%",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6536550"
+      }
+    ],
+    "2408": [
+      {
+        "date": "2026-07-10",
+        "source": "Yahoo",
+        "author": "Yahoo 股市新聞",
+        "text": "Nanya Technology Corp (TPE:2408) Q2 2026 Earnings Call Highlights: Revenue Surges Amidst Supply ...",
+        "heat": "",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/nanya-technology-corp-tpe-2408-190015806.html?.tsrc=rss"
+      }
+    ],
+    "2492": [
+      {
+        "date": "2026-07-15",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "處置股新增華新科等3檔被關至7/29 聯電明起出關今飆漲停",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6536078"
+      }
+    ],
+    "3231": [
+      {
+        "date": "2026-07-16",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "〈焦點股〉電子五哥緯創、英業達相繼貼息 廣達除息秀沒漲聲跌逾4%",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6536550"
+      }
+    ],
+    "6770": [
+      {
+        "date": "2026-07-16",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "鉅亨速報 - Factset 最新調查：力積電(6770-TW)目標價調升至88.8元，幅度約13.85%",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6536313"
+      },
+      {
+        "date": "2026-07-16",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "《價值型投資 最新產業研究報告》力積電（6770-TW）記憶體代工漲價，3D AI晶圓代工打開轉機",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6536628"
+      }
+    ],
+    "INTC": [
+      {
+        "date": "2026-07-14",
+        "source": "Yahoo",
+        "author": "Yahoo 股市新聞",
+        "text": "HSBC is Bullish on Intel Corporation (INTC)",
+        "heat": "",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/hsbc-bullish-intel-corporation-intc-185450746.html?.tsrc=rss"
+      },
+      {
+        "date": "2026-07-04",
+        "source": "Yahoo",
+        "author": "Yahoo 股市新聞",
+        "text": "Is Intel’s (INTC) AI-Ready Classroom Push Quietly Reshaping Its Long-Term PC Strategy?",
+        "heat": "",
+        "url": "https://finance.yahoo.com/technology/ai/articles/intel-intc-ai-ready-classroom-230954173.html?.tsrc=rss"
+      },
+      {
+        "date": "2026-06-17",
+        "source": "Yahoo",
+        "author": "Yahoo 股市新聞",
+        "text": "Intel (INTC) Moves 18A P Into Risk Production As AI Partnerships Expand",
+        "heat": "",
+        "url": "https://finance.yahoo.com/technology/ai/articles/intel-intc-moves-18a-p-161232173.html?.tsrc=rss"
+      }
+    ],
+    "NVDA": [
+      {
+        "date": "2026-07-06",
+        "source": "Yahoo",
+        "author": "Yahoo 股市新聞",
+        "text": "NVDA, AAPL Stocks In Focus: Foxconn Beats Q2 Revenue Estimates But Sounds Caution On Geopolitics",
+        "heat": "",
+        "url": "https://stocktwits.com/news-articles/markets/equity/nvda-aapl-stocks-in-focus-foxconn-beats-q2-revenue-estimates-but-sounds-caution-on-geopolitics/cZm1ReOR7ks?.tsrc=rss"
+      },
+      {
+        "date": "2026-06-18",
+        "source": "Yahoo",
+        "author": "Yahoo 股市新聞",
+        "text": "Nvidia (NVDA) Expands AI Reach With Vultr Buildout And Europe Manufacturing",
+        "heat": "",
+        "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-nvda-expands-ai-reach-171655543.html?.tsrc=rss"
+      }
+    ],
+    "AAPL": [
+      {
+        "date": "2026-07-06",
+        "source": "Yahoo",
+        "author": "Yahoo 股市新聞",
+        "text": "NVDA, AAPL Stocks In Focus: Foxconn Beats Q2 Revenue Estimates But Sounds Caution On Geopolitics",
+        "heat": "",
+        "url": "https://stocktwits.com/news-articles/markets/equity/nvda-aapl-stocks-in-focus-foxconn-beats-q2-revenue-estimates-but-sounds-caution-on-geopolitics/cZm1ReOR7ks?.tsrc=rss"
+      }
+    ]
+  }
 }
