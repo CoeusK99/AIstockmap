@@ -9,7 +9,8 @@
   },
   "scripts": {
     "start": "node server.js",
-    "sync:transcripts": "node scripts/sync-alphamemo.mjs"
+    "sync:transcripts": "node scripts/sync-alphamemo.mjs",
+    "sync:rumors": "node scripts/sync-rumors.mjs"
   },
   "dependencies": {
     "express": "^4.21.2"

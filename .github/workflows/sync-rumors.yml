@@ -1,0 +1,39 @@
+# 同步 X(Twitter)KOL 貼文到市場傳聞索引 public/rumors.json
+# 需要 repo secret:X_BEARER_TOKEN(X API Basic 以上);未設定時安靜跳過。
+# 每天兩次以控制 API 用量(Basic 方案每月讀取額度有限)。
+name: Sync KOL rumors
+
+on:
+  schedule:
+    - cron: "0 1,13 * * *"   # 每天 09:00 / 21:00 台北時間
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Sync KOL posts
+        env:
+          X_BEARER_TOKEN: ${{ secrets.X_BEARER_TOKEN }}
+        run: node scripts/sync-rumors.mjs
+
+      - name: Commit if changed
+        run: |
+          if git diff --quiet public/rumors.json 2>/dev/null; then
+            echo "索引無變化,略過提交"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/rumors.json
+          git commit -m "chore: 同步 KOL 市場傳聞索引"
+          git push

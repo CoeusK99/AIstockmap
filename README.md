@@ -57,3 +57,16 @@ npm start          # http://localhost:3000
 - 研究文件:`docs/<股號>/日期_類型_標題.pdf`,由 `/api/docs` 自動掃描建索引。
 
 > 本專案僅供產業研究與學習,不構成投資建議。
+
+## KOL 市場傳聞(選配)
+
+面板可顯示指定 X(Twitter)KOL 的個股相關貼文(「KOL 觀點・未經證實」區)。
+X 已無免費讀取管道,需自備 **X API Basic 以上**的 Bearer Token:
+
+1. 編輯 `config/kols.json` 填入要追蹤的帳號
+2. repo Settings → Secrets → Actions 新增 `X_BEARER_TOKEN`
+3. `npm run sync:rumors` 或等排程(每天 09:00/21:00 台北時間)自動同步,
+   貼文自動比對個股(公司名/股號/美股代碼)寫入 `public/rumors.json`
+
+> 未設 Token 時排程安靜跳過。傳聞內容未經證實,僅供參考,非投資建議;
+> 不做網頁爬蟲(違反 X 服務條款)。

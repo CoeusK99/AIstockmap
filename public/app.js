@@ -483,6 +483,7 @@
   let docs = {};          // 研究文件:docs/<股號>/ 資料夾自動索引
   let transcripts = {};   // AlphaMemo 逐字稿索引:scripts/sync-alphamemo.mjs 產生
   let fundamentals = {};  // 基本面:EPS/本益比/殖利率(伺服器代理交易所開放資料)
+  let rumors = {};        // 市場傳聞:X KOL 貼文索引(scripts/sync-rumors.mjs 產生)
   const quoteStatus = document.getElementById("quote-status");
 
   // 外部字串(API 資料、檔名)一律跳脫後才放進 innerHTML
@@ -507,6 +508,10 @@
   fetch("/api/fundamentals")
     .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
     .then((d) => { fundamentals = d.fundamentals || {}; rerenderPanel(); })
+    .catch(() => {});
+  fetch("/rumors.json")
+    .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
+    .then((d) => { rumors = d.rumors || {}; rerenderPanel(); })
     .catch(() => {});
 
   fetch("/api/quotes")
@@ -697,6 +702,22 @@
                 .join("")
             : `<div class="doc-hint">將逐字稿或券商報告放入 <code>docs/${esc(n.id)}/</code><br>檔名:<code>日期_類型_標題.pdf</code>,重新整理即會列出。</div>`);
 
+    // 市場傳聞:X KOL 公開貼文(未經證實,僅供參考)
+    const rumorItems = (rumors[n.id] || []).slice(0, 5);
+    const rumorBlock = rumorItems.length
+      ? `<h3>KOL 觀點・未經證實(${rumorItems.length})</h3>` +
+        rumorItems
+          .map(
+            (it) =>
+              `<a class="rel-item rumor" href="${esc(it.url)}" target="_blank" rel="noopener">
+                 <span class="who">@${esc(it.handle)} <span style="color:var(--text-muted);font-weight:400">${esc(it.date)}</span></span>
+                 <span class="what">${esc(it.text)}</span>
+               </a>`
+          )
+          .join("") +
+        `<div class="doc-hint" style="margin-top:4px">來源為 KOL 公開貼文,內容未經證實,非投資建議。</div>`
+      : "";
+
     // 外部資源(公開網站的個股頁)
     const extBlock =
       n.market === "foreign"
@@ -728,6 +749,7 @@
       ${relBlock("下游客戶", rel.down, "→")}
       ${relBlock("集團/持股", rel.group, "")}
       ${relBlock("競爭對手", rel.rival, "")}
+      ${rumorBlock}
       ${extBlock}
     `;
     panel.classList.add("open");

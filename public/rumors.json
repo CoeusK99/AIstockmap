@@ -1,0 +1,6 @@
+{
+  "updated": "",
+  "kols": [],
+  "note": "KOL 公開貼文之索引(標題/連結/摘錄),內容未經證實,僅供參考,非投資建議。填好 config/kols.json 與 X_BEARER_TOKEN 後由 npm run sync:rumors 產生。",
+  "rumors": {}
+}

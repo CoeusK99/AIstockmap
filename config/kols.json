@@ -1,0 +1,7 @@
+{
+  "note": "要追蹤的 X(Twitter)KOL 帳號。username 填 @ 後面的帳號名;需要 X API Basic 以上的 Bearer Token,設定在 GitHub repo Settings → Secrets and variables → Actions → X_BEARER_TOKEN。REPLACE_ME 開頭的項目會被略過。",
+  "kols": [
+    { "username": "REPLACE_ME_1", "name": "範例:半導體產業 KOL(請改成實際帳號)" },
+    { "username": "REPLACE_ME_2", "name": "範例:供應鏈爆料帳號(請改成實際帳號)" }
+  ]
+}
