@@ -180,6 +180,15 @@ async function fetchYahoo() {
         const d = new Date(pub);
         const date = isNaN(d) ? "" : d.toISOString().slice(0, 10);
         for (const code of codes) {
+          // 防誤歸戶:英文標題裡的四碼數字可能是他國交易所代號
+          // (例:TSE:2337 是東京的 Ichigo,不是旺宏)。台股四碼僅在
+          // 標題含中文、或明確標記 TPE: 代號時才收;其他交易所標記直接排除。
+          if (/^\d{4}$/.test(code)) {
+            const hasChinese = /[一-鿿]/.test(title);
+            const hasTpe = title.includes(`TPE:${code}`) || title.includes(`TPE: ${code}`);
+            const foreignTag = new RegExp(`\\b(?:TSE|TYO|KRX|KOSDAQ|HKG|SHE|SHA|BOM|NSE):\\s?${code}\\b`).test(title);
+            if (foreignTag || (!hasChinese && !hasTpe)) continue;
+          }
           (byCode[code] ||= []).push({ date, source: "Yahoo", author: "Yahoo 股市新聞", text: title.slice(0, 160), heat: "", url: link });
         }
       }
@@ -190,6 +199,67 @@ async function fetchYahoo() {
   }
   const total = Object.values(byCode).reduce((n, l) => n + l.length, 0);
   console.log(`Yahoo:歸戶 ${Object.keys(byCode).length} 檔、${total} 則新聞`);
+  return byCode;
+}
+
+// --- 鉅亨網 台股新聞(免費、中文、雲端可達)--------------------------------------
+// 兩個候選端點依序嘗試:公開新聞列表 API(JSON)→ RSS。中文標題用公司名比對,
+// 命中品質遠高於英文來源。
+async function fetchCnyes() {
+  const byCode = {};
+  const push = (title, url, date) => {
+    for (const code of matchStocks(title)) {
+      (byCode[code] ||= []).push({ date, source: "鉅亨", author: "鉅亨網", text: title.slice(0, 160), heat: "", url });
+    }
+  };
+
+  // 端點 1:公開新聞列表 API
+  try {
+    const res = await fetch("https://api.cnyes.com/media/api/v1/newslist/category/tw_stock?limit=60", {
+      signal: AbortSignal.timeout(20000),
+      headers: { "user-agent": UA, accept: "application/json" },
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const json = await res.json();
+    const rows = json?.items?.data || json?.data?.items || json?.data || [];
+    if (Array.isArray(rows) && rows.length) {
+      for (const row of rows) {
+        const title = decode(row.title || "");
+        const id = row.newsId || row.newsID || row.id;
+        if (!title || !id) continue;
+        const ts = row.publishAt || row.publish_at || 0;
+        const date = ts ? new Date(ts * (ts < 1e12 ? 1000 : 1)).toISOString().slice(0, 10) : "";
+        push(title, `https://news.cnyes.com/news/id/${id}`, date);
+      }
+      const total = Object.values(byCode).reduce((n, l) => n + l.length, 0);
+      console.log(`鉅亨(API):${rows.length} 則新聞,歸戶 ${Object.keys(byCode).length} 檔、${total} 則`);
+      return byCode;
+    }
+    throw new Error("API 回應無資料列");
+  } catch (err) {
+    console.log(`鉅亨 API 失敗(${err.message}),改試 RSS`);
+  }
+
+  // 端點 2:RSS
+  const res = await fetch("https://news.cnyes.com/rss/v1/news/category/tw_stock", {
+    signal: AbortSignal.timeout(20000),
+    headers: { "user-agent": UA },
+  });
+  if (!res.ok) throw new Error(`鉅亨 RSS -> HTTP ${res.status}`);
+  const xml = await res.text();
+  let count = 0;
+  for (const m of xml.matchAll(/<item>([\s\S]*?)<\/item>/g)) {
+    const item = m[1];
+    const title = decode(((item.match(/<title>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?<\/title>/) || [])[1] || "").trim());
+    const link = decode(((item.match(/<link>([\s\S]*?)<\/link>/) || [])[1] || "").trim());
+    const pub = ((item.match(/<pubDate>([\s\S]*?)<\/pubDate>/) || [])[1] || "").trim();
+    if (!title || !link) continue;
+    count++;
+    const d = new Date(pub);
+    push(title, link, isNaN(d) ? "" : d.toISOString().slice(0, 10));
+  }
+  const total = Object.values(byCode).reduce((n, l) => n + l.length, 0);
+  console.log(`鉅亨(RSS):${count} 則新聞,歸戶 ${Object.keys(byCode).length} 檔、${total} 則`);
   return byCode;
 }
 
@@ -248,7 +318,7 @@ async function fetchX() {
 
 // --- 主流程 ----------------------------------------------------------------------
 async function main() {
-  const results = await Promise.allSettled([fetchPtt(), fetchYahoo(), fetchX()]);
+  const results = await Promise.allSettled([fetchPtt(), fetchCnyes(), fetchYahoo(), fetchX()]);
   const byCode = {};
   for (const r of results) {
     if (r.status !== "fulfilled") {
@@ -286,7 +356,7 @@ async function main() {
     JSON.stringify(
       {
         updated: new Date().toISOString().slice(0, 10),
-        sources: ["PTT 股票板", "Yahoo 股市新聞", "X KOL(選配)"],
+        sources: ["PTT 股票板", "鉅亨網台股新聞", "Yahoo 股市新聞", "X KOL(選配)"],
         note: "公開討論之索引(標題/摘錄/連結),內容未經證實,僅供參考,非投資建議。",
         rumors: merged,
       },
