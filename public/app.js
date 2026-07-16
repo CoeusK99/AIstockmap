@@ -702,20 +702,21 @@
                 .join("")
             : `<div class="doc-hint">將逐字稿或券商報告放入 <code>docs/${esc(n.id)}/</code><br>檔名:<code>日期_類型_標題.pdf</code>,重新整理即會列出。</div>`);
 
-    // 市場傳聞:X KOL 公開貼文(未經證實,僅供參考)
-    const rumorItems = (rumors[n.id] || []).slice(0, 5);
+    // 市場聲量:PTT 股票板 + X KOL 公開貼文(未經證實,僅供參考)
+    const rumorItems = (rumors[n.id] || []).slice(0, 6);
     const rumorBlock = rumorItems.length
-      ? `<h3>KOL 觀點・未經證實(${rumorItems.length})</h3>` +
+      ? `<h3>市場聲量・未經證實(${rumorItems.length})</h3>` +
         rumorItems
           .map(
             (it) =>
               `<a class="rel-item rumor" href="${esc(it.url)}" target="_blank" rel="noopener">
-                 <span class="who">@${esc(it.handle)} <span style="color:var(--text-muted);font-weight:400">${esc(it.date)}</span></span>
+                 <span class="who"><span class="doc-type">${esc(it.source || "PTT")}</span>${esc(it.author || it.handle || "")}
+                   <span style="color:var(--text-muted);font-weight:400">${esc(it.date)}${it.heat ? ` · 推 ${esc(it.heat)}` : ""}</span></span>
                  <span class="what">${esc(it.text)}</span>
                </a>`
           )
           .join("") +
-        `<div class="doc-hint" style="margin-top:4px">來源為 KOL 公開貼文,內容未經證實,非投資建議。</div>`
+        `<div class="doc-hint" style="margin-top:4px">來源為公開討論區/貼文,內容未經證實,非投資建議。</div>`
       : "";
 
     // 外部資源(公開網站的個股頁)

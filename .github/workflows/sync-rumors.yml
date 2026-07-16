@@ -1,12 +1,15 @@
-# 同步 X(Twitter)KOL 貼文到市場傳聞索引 public/rumors.json
-# 需要 repo secret:X_BEARER_TOKEN(X API Basic 以上);未設定時安靜跳過。
-# 每天兩次以控制 API 用量(Basic 方案每月讀取額度有限)。
-name: Sync KOL rumors
+# 同步市場聲量到 public/rumors.json
+# 來源:PTT 股票板(免費)+ X KOL(選配,需 repo secret X_BEARER_TOKEN)。
+name: Sync market chatter
 
 on:
   schedule:
     - cron: "0 1,13 * * *"   # 每天 09:00 / 21:00 台北時間
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/sync-rumors.mjs"   # 解析器更新時立即重新同步
 
 permissions:
   contents: write
@@ -21,10 +24,19 @@ jobs:
         with:
           node-version: "24"
 
-      - name: Sync KOL posts
+      - name: Sync chatter
         env:
           X_BEARER_TOKEN: ${{ secrets.X_BEARER_TOKEN }}
-        run: node scripts/sync-rumors.mjs
+        run: node scripts/sync-rumors.mjs --dump /tmp/ptt-index.html
+
+      # 解析失敗時上傳抓到的頁面,方便診斷版面
+      - name: Upload fetched page for diagnosis
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ptt-index
+          path: /tmp/ptt-index.html
+          retention-days: 3
 
       - name: Commit if changed
         run: |
@@ -35,5 +47,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add public/rumors.json
-          git commit -m "chore: 同步 KOL 市場傳聞索引"
+          git commit -m "chore: 同步市場聲量索引(PTT/X)"
           git push
