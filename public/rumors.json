@@ -1,6 +1,85 @@
 {
-  "updated": "",
-  "sources": ["PTT 股票板", "X KOL(選配)"],
-  "note": "公開討論之索引(標題/摘錄/連結),內容未經證實,僅供參考,非投資建議。由 npm run sync:rumors 產生。",
-  "rumors": {}
+  "updated": "2026-07-16",
+  "sources": [
+    "PTT 股票板",
+    "Yahoo 股市新聞",
+    "X KOL(選配)"
+  ],
+  "note": "公開討論之索引(標題/摘錄/連結),內容未經證實,僅供參考,非投資建議。",
+  "rumors": {
+    "2337": [
+      {
+        "date": "2026-07-07",
+        "source": "Yahoo",
+        "author": "Yahoo 股市新聞",
+        "text": "Ichigo (TSE:2337) Following June Output Miss Is The Stock Still Modestly Undervalued",
+        "heat": "",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/ichigo-tse-2337-following-june-121530869.html?.tsrc=rss"
+      }
+    ],
+    "2408": [
+      {
+        "date": "2026-07-10",
+        "source": "Yahoo",
+        "author": "Yahoo 股市新聞",
+        "text": "Nanya Technology Corp (TPE:2408) Q2 2026 Earnings Call Highlights: Revenue Surges Amidst Supply ...",
+        "heat": "",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/nanya-technology-corp-tpe-2408-190015806.html?.tsrc=rss"
+      }
+    ],
+    "INTC": [
+      {
+        "date": "2026-07-14",
+        "source": "Yahoo",
+        "author": "Yahoo 股市新聞",
+        "text": "HSBC is Bullish on Intel Corporation (INTC)",
+        "heat": "",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/hsbc-bullish-intel-corporation-intc-185450746.html?.tsrc=rss"
+      },
+      {
+        "date": "2026-07-04",
+        "source": "Yahoo",
+        "author": "Yahoo 股市新聞",
+        "text": "Is Intel’s (INTC) AI-Ready Classroom Push Quietly Reshaping Its Long-Term PC Strategy?",
+        "heat": "",
+        "url": "https://finance.yahoo.com/technology/ai/articles/intel-intc-ai-ready-classroom-230954173.html?.tsrc=rss"
+      },
+      {
+        "date": "2026-06-17",
+        "source": "Yahoo",
+        "author": "Yahoo 股市新聞",
+        "text": "Intel (INTC) Moves 18A P Into Risk Production As AI Partnerships Expand",
+        "heat": "",
+        "url": "https://finance.yahoo.com/technology/ai/articles/intel-intc-moves-18a-p-161232173.html?.tsrc=rss"
+      }
+    ],
+    "NVDA": [
+      {
+        "date": "2026-07-06",
+        "source": "Yahoo",
+        "author": "Yahoo 股市新聞",
+        "text": "NVDA, AAPL Stocks In Focus: Foxconn Beats Q2 Revenue Estimates But Sounds Caution On Geopolitics",
+        "heat": "",
+        "url": "https://stocktwits.com/news-articles/markets/equity/nvda-aapl-stocks-in-focus-foxconn-beats-q2-revenue-estimates-but-sounds-caution-on-geopolitics/cZm1ReOR7ks?.tsrc=rss"
+      },
+      {
+        "date": "2026-06-18",
+        "source": "Yahoo",
+        "author": "Yahoo 股市新聞",
+        "text": "Nvidia (NVDA) Expands AI Reach With Vultr Buildout And Europe Manufacturing",
+        "heat": "",
+        "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-nvda-expands-ai-reach-171655543.html?.tsrc=rss"
+      }
+    ],
+    "AAPL": [
+      {
+        "date": "2026-07-06",
+        "source": "Yahoo",
+        "author": "Yahoo 股市新聞",
+        "text": "NVDA, AAPL Stocks In Focus: Foxconn Beats Q2 Revenue Estimates But Sounds Caution On Geopolitics",
+        "heat": "",
+        "url": "https://stocktwits.com/news-articles/markets/equity/nvda-aapl-stocks-in-focus-foxconn-beats-q2-revenue-estimates-but-sounds-caution-on-geopolitics/cZm1ReOR7ks?.tsrc=rss"
+      }
+    ]
+  }
 }
