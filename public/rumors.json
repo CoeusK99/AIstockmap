@@ -8,6 +8,16 @@
   ],
   "note": "公開討論之索引(標題/摘錄/連結),內容未經證實,僅供參考,非投資建議。",
   "rumors": {
+    "2059": [
+      {
+        "date": "2026-07-17",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "北美雲端客戶追加萬櫃訂單助攻 川湖導軌看旺至2027年",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6538858"
+      }
+    ],
     "2303": [
       {
         "date": "2026-07-15",
@@ -36,7 +46,49 @@
         "url": "https://news.cnyes.com/news/id/6536069"
       }
     ],
+    "2327": [
+      {
+        "date": "2026-07-17",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "闢謠大股東解質押賣股傳聞 國巨*發聲明：未收到申報或通知",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6538822"
+      }
+    ],
     "2330": [
+      {
+        "date": "2026-07-17",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "【量大強漲股整理】【台股大崩盤】台積電「利多出盡」？別逃！我只做這件事!",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6538814"
+      },
+      {
+        "date": "2026-07-17",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "台股崩近3千點 外資殺出史上第一大賣超1890億元 狂砍台積電千億元",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6538789"
+      },
+      {
+        "date": "2026-07-17",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "AI狂潮踩剎車！台積電財報報喜卻血洗亞股，台股史上最大跌點寫紀錄",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6538897"
+      },
+      {
+        "date": "2026-07-17",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "看台積電的法說會時除了先進製程，你還可以專注這個產業",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6538949"
+      },
       {
         "date": "2026-07-17",
         "source": "鉅亨",
@@ -49,57 +101,9 @@
         "date": "2026-07-16",
         "source": "鉅亨",
         "author": "鉅亨網",
-        "text": "〈台積電法說〉宣布追加美國1000億美元投資 魏哲家：再建4座廠以上",
+        "text": "〈台積電法說〉二度上調全年展望、加碼美國投資 九大重點一文看懂",
         "heat": "",
-        "url": "https://news.cnyes.com/news/id/6536882"
-      },
-      {
-        "date": "2026-07-16",
-        "source": "鉅亨",
-        "author": "鉅亨網",
-        "text": "【量大強漲股整理】 【台積電】大鬥ASML！「設備漲價」股價會崩嗎？破解晶圓霸主拒絕買單的背後真相！",
-        "heat": "",
-        "url": "https://news.cnyes.com/news/id/6536991"
-      },
-      {
-        "date": "2026-07-16",
-        "source": "鉅亨",
-        "author": "鉅亨網",
-        "text": "〈台股開盤〉台積電法說倒數股價弱 指數跌逾600點打4萬5保衛戰",
-        "heat": "",
-        "url": "https://news.cnyes.com/news/id/6536519"
-      },
-      {
-        "date": "2026-07-16",
-        "source": "鉅亨",
-        "author": "鉅亨網",
-        "text": "The Information：ASML計劃調高曝光機價格 台積電反對",
-        "heat": "",
-        "url": "https://news.cnyes.com/news/id/6536302"
-      },
-      {
-        "date": "2026-07-16",
-        "source": "鉅亨",
-        "author": "鉅亨網",
-        "text": "鉅亨速報 - Factset 最新調查：台積電(2330-TW)目標價調升至3090元，幅度約3%",
-        "heat": "",
-        "url": "https://news.cnyes.com/news/id/6537320"
-      },
-      {
-        "date": "2026-07-16",
-        "source": "鉅亨",
-        "author": "鉅亨網",
-        "text": "Jim Cramer：半導體淪為「情緒賭場」 SK 海力士上市拖累台積電",
-        "heat": "",
-        "url": "https://news.cnyes.com/news/id/6537284"
-      },
-      {
-        "date": "2026-07-16",
-        "source": "鉅亨",
-        "author": "鉅亨網",
-        "text": "AI浪潮助攻 多家機構看好台積電 目標價頻創新高",
-        "heat": "",
-        "url": "https://news.cnyes.com/news/id/6537278"
+        "url": "https://news.cnyes.com/news/id/6537162"
       },
       {
         "date": "2026-07-16",
@@ -113,9 +117,25 @@
         "date": "2026-07-16",
         "source": "鉅亨",
         "author": "鉅亨網",
-        "text": "〈台積電法說〉二度上調全年展望、加碼美國投資 九大重點一文看懂",
+        "text": "AI浪潮助攻 多家機構看好台積電 目標價頻創新高",
         "heat": "",
-        "url": "https://news.cnyes.com/news/id/6537162"
+        "url": "https://news.cnyes.com/news/id/6537278"
+      },
+      {
+        "date": "2026-07-16",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "Jim Cramer：半導體淪為「情緒賭場」 SK 海力士上市拖累台積電",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6537284"
+      },
+      {
+        "date": "2026-07-16",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "鉅亨速報 - Factset 最新調查：台積電(2330-TW)目標價調升至3090元，幅度約3%",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6537320"
       }
     ],
     "2356": [
@@ -182,6 +202,16 @@
         "url": "https://news.cnyes.com/news/id/6536550"
       }
     ],
+    "2395": [
+      {
+        "date": "2026-07-17",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "鉅亨速報 - Factset 最新調查：研華(2395-TW)EPS預估上修至15.74元，預估目標價為530元",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6538971"
+      }
+    ],
     "2408": [
       {
         "date": "2026-07-10",
@@ -218,6 +248,16 @@
         "url": "https://news.cnyes.com/news/id/6536078"
       }
     ],
+    "3008": [
+      {
+        "date": "2026-07-17",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "好股票遇到鬼故事、大立光、中美晶、群創",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6538818"
+      }
+    ],
     "3231": [
       {
         "date": "2026-07-16",
@@ -226,6 +266,16 @@
         "text": "〈焦點股〉電子五哥緯創、英業達相繼貼息 廣達除息秀沒漲聲跌逾4%",
         "heat": "",
         "url": "https://news.cnyes.com/news/id/6536550"
+      }
+    ],
+    "5483": [
+      {
+        "date": "2026-07-17",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "好股票遇到鬼故事、大立光、中美晶、群創",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6538818"
       }
     ],
     "6239": [
@@ -328,12 +378,20 @@
     ],
     "AMD": [
       {
-        "date": "2026-07-16",
+        "date": "2026-07-17",
         "source": "Yahoo",
         "author": "Yahoo 股市新聞",
-        "text": "Lattice Semiconductor, AMD, and Qualcomm Shares Are Falling, What You Need To Know",
+        "text": "The Zacks Analyst Blog Highlights NVIDIA, AMD,  Taiwan Semiconductor Manufacturing and Seagate",
         "heat": "",
-        "url": "https://finance.yahoo.com/markets/stocks/articles/lattice-semiconductor-amd-qualcomm-shares-224922431.html?.tsrc=rss"
+        "url": "https://finance.yahoo.com/markets/stocks/articles/zacks-analyst-blog-highlights-nvidia-132100178.html?.tsrc=rss"
+      },
+      {
+        "date": "2026-07-17",
+        "source": "Yahoo",
+        "author": "Yahoo 股市新聞",
+        "text": "AMD Falls 5%, Intel Drops 4%, NVIDIA Slides 3% Before Recovering as Rotation Hits Semiconductor Stocks",
+        "heat": "",
+        "url": "https://247wallst.com/investing/2026/07/17/amd-falls-5-intel-drops-4-nvidia-slides-3-before-recovering-as-rotation-hits-semiconductor-stocks/?.tsrc=rss"
       },
       {
         "date": "2026-07-16",
@@ -342,6 +400,14 @@
         "text": "Why AMD Stock Is Falling Premarket Today Despite Fresh Price Target Hikes",
         "heat": "",
         "url": "https://stocktwits.com/news-articles/markets/equity/why-amd-stock-is-falling-premarket-today-despite-fresh-price-target-hikes/cZZEPmER7rw?.tsrc=rss"
+      },
+      {
+        "date": "2026-07-16",
+        "source": "Yahoo",
+        "author": "Yahoo 股市新聞",
+        "text": "Lattice Semiconductor, AMD, and Qualcomm Shares Are Falling, What You Need To Know",
+        "heat": "",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/lattice-semiconductor-amd-qualcomm-shares-224922431.html?.tsrc=rss"
       }
     ],
     "MU": [
