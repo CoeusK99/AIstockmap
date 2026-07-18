@@ -89,6 +89,12 @@
     }
     #graph .node .tk { fill: var(--text-muted); stroke-width: 2.5px; }
     #graph .faded { opacity: 0.08; }
+    #graph .link-label {
+      display: none; font-size: 9.5px; fill: var(--text-secondary);
+      text-anchor: middle; pointer-events: none;
+      paint-order: stroke; stroke: var(--surface-1); stroke-width: 3px; stroke-linejoin: round;
+    }
+    #graph g.hl .link-label { display: block; }
   `;
   document.head.appendChild(style);
 
@@ -109,7 +115,16 @@
     .on("mousemove", (ev, d) => showLinkTip(ev, d))
     .on("mouseleave", hideTip);
 
-  function linkPath(d) {
+  // 選取公司時,關係線中點浮出標籤(供應線=產品、持股線=持股說明)
+  linkG
+    .append("text")
+    .attr("class", "link-label")
+    .text((d) => {
+      const t = d.label || "";
+      return t.length > 16 ? t.slice(0, 15) + "…" : t;
+    });
+
+  function linkGeom(d) {
     const sx = d.source.x, sy = d.source.y;
     let tx = d.target.x, ty = d.target.y;
     const dx = tx - sx, dy = ty - sy;
@@ -120,9 +135,20 @@
       ty -= (dy / len) * pad;
     }
     const curve = Math.min(36, len * 0.14);
-    const mx = (sx + tx) / 2 - (dy / len) * curve;
-    const my = (sy + ty) / 2 + (dx / len) * curve;
-    return `M${sx},${sy} Q${mx},${my} ${tx},${ty}`;
+    const cx = (sx + tx) / 2 - (dy / len) * curve;
+    const cy = (sy + ty) / 2 + (dx / len) * curve;
+    return { sx, sy, tx, ty, cx, cy };
+  }
+
+  function linkPath(d) {
+    const g = linkGeom(d);
+    return `M${g.sx},${g.sy} Q${g.cx},${g.cy} ${g.tx},${g.ty}`;
+  }
+
+  // 二次貝茲曲線 t=0.5 的點(標籤錨點)
+  function linkMid(d) {
+    const g = linkGeom(d);
+    return { x: 0.25 * g.sx + 0.5 * g.cx + 0.25 * g.tx, y: 0.25 * g.sy + 0.5 * g.cy + 0.25 * g.ty };
   }
 
   // ---------- 節點 ----------
@@ -210,6 +236,10 @@
 
   sim.on("tick", () => {
     linkG.selectAll("path").attr("d", (d) => linkPath(d));
+    linkG
+      .select(".link-label")
+      .attr("x", (d) => linkMid(d).x)
+      .attr("y", (d) => linkMid(d).y - 4);
     nodeSel.attr("transform", (d) => `translate(${d.x},${d.y})`);
   });
 
