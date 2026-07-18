@@ -623,13 +623,15 @@
     chipBox.appendChild(el);
   });
 
-  // ---------- AI 供應鏈十大主題 ----------
+  // ---------- AI 供應鏈主題(含成熟度星級)----------
+  const THEME_STARS = window.MAP_THEME_STARS || {};
   const themeBox = document.getElementById("theme-chips");
   if (themeBox) {
     Object.keys(THEMES).forEach((t) => {
       const el = document.createElement("span");
       el.className = "chip theme";
-      el.textContent = t;
+      el.textContent = THEME_STARS[t] ? `${t} ${THEME_STARS[t]}` : t;
+      el.title = "成熟度:★★★★★核心/★★★★重要/★★★成長/★★觀察/★概念";
       el.onclick = () => {
         if (state.themes.has(t)) state.themes.delete(t);
         else state.themes.add(t);
