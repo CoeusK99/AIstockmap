@@ -1,8 +1,15 @@
 {
-  "updated": "2026-07-15",
+  "updated": "2026-07-18",
   "source": "https://www.alphamemo.ai/free-transcripts",
   "note": "僅索引標題/日期/連結,內容屬 AlphaMemo 所有;連結開啟原站頁面。",
   "transcripts": {
+    "1785": [
+      {
+        "date": "2026-06-01",
+        "title": "光洋科 2026Q2 法說會逐字稿",
+        "url": "https://www.alphamemo.ai/free-transcripts/75ae694f-7897-499b-a78b-5eb971146649"
+      }
+    ],
     "2059": [
       {
         "date": "2026-05-07",
@@ -31,6 +38,13 @@
         "url": "https://www.alphamemo.ai/free-transcripts/a519f232-9b72-4950-bf0b-2f9f61e3dce9"
       }
     ],
+    "2312": [
+      {
+        "date": "2026-06-30",
+        "title": "金寶 2026Q2 法說會逐字稿",
+        "url": "https://www.alphamemo.ai/free-transcripts/ccdf7d7a-f8fe-4c7f-8c57-a24ad6f97c5b"
+      }
+    ],
     "2317": [
       {
         "date": "2026-05-14",
@@ -46,6 +60,11 @@
       }
     ],
     "2330": [
+      {
+        "date": "2026-07-16",
+        "title": "台積電 2026Q3 法說會逐字稿",
+        "url": "https://www.alphamemo.ai/free-transcripts/00a7f696-8392-4e74-b60e-7391496f587f"
+      },
       {
         "date": "2026-05-26",
         "title": "台積電 2026Q2 法說會逐字稿",
@@ -71,6 +90,13 @@
         "date": "2026-05-20",
         "title": "宏碁 2026Q2 法說會逐字稿",
         "url": "https://www.alphamemo.ai/free-transcripts/98db7a73-2d5f-4aee-969a-898dda5a81cd"
+      }
+    ],
+    "2354": [
+      {
+        "date": "2026-06-30",
+        "title": "鴻準 2026Q2 法說會逐字稿",
+        "url": "https://www.alphamemo.ai/free-transcripts/4c71c710-a3d0-4f3b-a355-9ddcd2759e74"
       }
     ],
     "2356": [
@@ -146,6 +172,13 @@
         "date": "2026-04-30",
         "title": "聯發科 2026Q2 法說會逐字稿",
         "url": "https://www.alphamemo.ai/free-transcripts/86d3a3bc-a4a6-478a-9546-c9760d5c5d28"
+      }
+    ],
+    "2458": [
+      {
+        "date": "2026-06-08",
+        "title": "義隆 2026Q2 法說會逐字稿",
+        "url": "https://www.alphamemo.ai/free-transcripts/867aa754-a9a2-4740-80c1-e2838b9c04d1"
       }
     ],
     "2492": [
@@ -230,6 +263,13 @@
         "url": "https://www.alphamemo.ai/free-transcripts/cc74811c-1b0d-450b-aec5-959ffc7a38ba"
       }
     ],
+    "3264": [
+      {
+        "date": "2026-05-04",
+        "title": "欣銓 2026Q2 法說會逐字稿",
+        "url": "https://www.alphamemo.ai/free-transcripts/b301db45-6246-41ea-936d-f90fa6330f46"
+      }
+    ],
     "3529": [
       {
         "date": "2026-05-08",
@@ -249,6 +289,13 @@
         "date": "2026-05-12",
         "title": "辛耘 2026Q2 法說會逐字稿",
         "url": "https://www.alphamemo.ai/free-transcripts/d8f6fef7-579b-40ed-8c51-244d8ac9ed6e"
+      }
+    ],
+    "3592": [
+      {
+        "date": "2026-05-07",
+        "title": "瑞鼎 2026Q2 法說會逐字稿",
+        "url": "https://www.alphamemo.ai/free-transcripts/754253e3-20ee-4731-aaba-89d1b9e370e8"
       }
     ],
     "3661": [
@@ -279,6 +326,13 @@
         "url": "https://www.alphamemo.ai/free-transcripts/fd8aa54f-ba4a-47ef-8c98-42970d27b144"
       }
     ],
+    "3706": [
+      {
+        "date": "2026-05-28",
+        "title": "神達 2026Q2 法說會逐字稿",
+        "url": "https://www.alphamemo.ai/free-transcripts/d3644dca-9a7e-4b87-b564-3a65a8efca8c"
+      }
+    ],
     "3711": [
       {
         "date": "2026-04-29",
@@ -286,11 +340,25 @@
         "url": "https://www.alphamemo.ai/free-transcripts/8eaafcc3-ad0c-43d4-a223-9fcf02214354"
       }
     ],
+    "4961": [
+      {
+        "date": "2026-05-11",
+        "title": "天鈺 2026Q2 法說會逐字稿",
+        "url": "https://www.alphamemo.ai/free-transcripts/fac73eeb-5f3a-4e8c-9ca5-f147d5a00de3"
+      }
+    ],
     "4966": [
       {
         "date": "2026-04-22",
         "title": "譜瑞-KY 2026Q2 法說會逐字稿",
         "url": "https://www.alphamemo.ai/free-transcripts/34b4b025-3dae-465d-bff6-b6ec569e196e"
+      }
+    ],
+    "4967": [
+      {
+        "date": "2026-04-28",
+        "title": "十銓 2026Q2 法說會逐字稿",
+        "url": "https://www.alphamemo.ai/free-transcripts/304771bb-bb89-484f-a6e7-82f665cfa978"
       }
     ],
     "5269": [
@@ -335,6 +403,13 @@
         "url": "https://www.alphamemo.ai/free-transcripts/30062108-d945-40ea-8975-bba08fe4f5c3"
       }
     ],
+    "6269": [
+      {
+        "date": "2026-05-08",
+        "title": "台郡 2026Q2 法說會逐字稿",
+        "url": "https://www.alphamemo.ai/free-transcripts/ad15ec7b-28df-4fcc-9aa1-933de9b1ab09"
+      }
+    ],
     "6285": [
       {
         "date": "2026-05-07",
@@ -375,6 +450,20 @@
         "url": "https://www.alphamemo.ai/free-transcripts/817407a2-22d9-4f79-a235-560aeb6e2ef0"
       }
     ],
+    "6526": [
+      {
+        "date": "2026-05-05",
+        "title": "達發 2026Q2 法說會逐字稿",
+        "url": "https://www.alphamemo.ai/free-transcripts/892025c9-67dc-4358-a858-67d3916721c5"
+      }
+    ],
+    "6531": [
+      {
+        "date": "2026-05-12",
+        "title": "愛普* 2026Q2 法說會逐字稿",
+        "url": "https://www.alphamemo.ai/free-transcripts/56568abb-79c4-45ce-9f9b-1720bac0ca61"
+      }
+    ],
     "6770": [
       {
         "date": "2026-07-14",
@@ -390,6 +479,13 @@
         "date": "2026-04-21",
         "title": "力積電 2026Q2 法說會逐字稿",
         "url": "https://www.alphamemo.ai/free-transcripts/50258efd-2a99-47cd-a08b-7a364a018475"
+      }
+    ],
+    "6805": [
+      {
+        "date": "2026-05-05",
+        "title": "富世達 2026Q2 法說會逐字稿",
+        "url": "https://www.alphamemo.ai/free-transcripts/a8772f26-9f04-4586-a817-f62029090354"
       }
     ],
     "8046": [
