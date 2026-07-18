@@ -121,7 +121,8 @@
     .attr("class", "link-label")
     .text((d) => {
       const t = d.label || "";
-      return t.length > 16 ? t.slice(0, 15) + "…" : t;
+      // pct = 該產品線約佔供應方營收的比重(data.js SUPPLY_PCT)
+      return (t.length > 16 ? t.slice(0, 15) + "…" : t) + (d.pct ? ` ${d.pct}%` : "");
     });
 
   function linkGeom(d) {
@@ -613,7 +614,8 @@
     const arrow = d.type === "supply" ? " → " : d.type === "cross" ? " ⇄ " : " ↔ ";
     tooltip.innerHTML = `
       <div class="t-name">${d.source.name}${arrow}${d.target.name}</div>
-      <div>${d.label || ""}</div>`;
+      <div>${d.label || ""}</div>
+      ${d.pct ? `<div class="t-sub">約佔${d.source.name}營收 ${d.pct}%(約略值)</div>` : ""}`;
     tooltip.style.display = "block";
     moveTip(ev);
   }
@@ -639,10 +641,11 @@
     const rel = { down: [], up: [], group: [], cross: [], rival: [] };
     simLinks.forEach((l) => {
       if (l.source.id === n.id) {
-        if (l.type === "supply") rel.down.push({ other: l.target, label: l.label });
+        // down 的 pct = 佔本公司營收;up 的 pct = 佔對方(供應商)營收
+        if (l.type === "supply") rel.down.push({ other: l.target, label: l.label, pct: l.pct, side: "self" });
         else rel[l.type].push({ other: l.target, label: l.label });
       } else if (l.target.id === n.id) {
-        if (l.type === "supply") rel.up.push({ other: l.source, label: l.label });
+        if (l.type === "supply") rel.up.push({ other: l.source, label: l.label, pct: l.pct, side: "other" });
         else rel[l.type].push({ other: l.source, label: l.label });
       }
     });
@@ -655,7 +658,7 @@
               (it) =>
                 `<button class="rel-item" data-id="${it.other.id}">
                    <span class="who">${arrow === "←" ? "← " : arrow === "→" ? "→ " : ""}${it.other.name}${it.other.market === "foreign" ? "" : ` <span style="color:var(--text-muted);font-weight:400">${it.other.id}</span>`}</span>
-                   <span class="what">${it.label || ""}</span>
+                   <span class="what">${it.label || ""}${it.pct ? `・約佔${it.side === "self" ? "營收" : "其營收"} ${it.pct}%` : ""}</span>
                  </button>`
             )
             .join("")

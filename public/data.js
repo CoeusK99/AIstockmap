@@ -267,6 +267,20 @@ const NODES = [
   { id: "2312", name: "金寶",     sector: "ems", tier: 3, market: "twse", tags: [],
     desc: "金仁寶集團 EMS 廠,事務機與伺服器週邊代工;金像電大股東。" },
 
+  // --- 2026-07 擴充 III --------------------------------------------------------
+  { id: "3481", name: "群創",     sector: "comp", tier: 2, market: "twse", tags: [],
+    desc: "面板雙虎之一,鴻海集團創立,電視/IT 面板與車載顯示。" },
+  { id: "3653", name: "健策",     sector: "comp", tier: 2, market: "twse", tags: ["AI"],
+    desc: "均熱片與導線架廠,GPU 金屬蓋板(lid)打入先進封裝散熱供應鏈。" },
+  { id: "6213", name: "聯茂",     sector: "comp", tier: 3, market: "twse", tags: ["伺服器"],
+    desc: "銅箔基板(CCL)三雄之一,高速低損耗板材供應伺服器與網通板。" },
+  { id: "2313", name: "華通",     sector: "comp", tier: 3, market: "twse", tags: ["蘋果鏈"],
+    desc: "HDI 板大廠,手機板與低軌衛星板並進。" },
+  { id: "2360", name: "致茂",     sector: "equip", tier: 2, market: "twse", tags: [],
+    desc: "量測設備廠,半導體/SoC 測試與電源測試設備供應商。" },
+  { id: "2351", name: "順德",     sector: "equip", tier: 3, market: "twse", tags: [],
+    desc: "IC 導線架大廠,封裝關鍵金屬材料供應商。" },
+
   // --- 海外要角(供應鏈上下游的境外錨點)--------------------------------------
   { id: "NVDA", name: "輝達",     sector: "abroad", tier: 1, market: "foreign", tags: ["AI"],
     desc: "AI GPU 絕對龍頭,晶片由台積電製造,整機由台灣代工廠組裝 — 台灣 AI 供應鏈的最大需求來源。" },
@@ -440,6 +454,17 @@ const LINKS = [
   { source: "3706", target: "CSP",  type: "supply", label: "雲端伺服器" },
   { source: "2312", target: "PCB",  type: "supply", label: "事務機/週邊代工" },
 
+  // --- 2026-07 擴充 III:供應鏈 ------------------------------------------------
+  { source: "3034", target: "3481", type: "supply", label: "面板驅動 IC" },
+  { source: "4961", target: "3481", type: "supply", label: "面板/電子紙驅動 IC" },
+  { source: "3481", target: "PCB",  type: "supply", label: "顯示面板" },
+  { source: "3653", target: "2330", type: "supply", label: "均熱片/金屬蓋板(先進封裝)" },
+  { source: "6213", target: "2368", type: "supply", label: "高速銅箔基板" },
+  { source: "2313", target: "AAPL", type: "supply", label: "手機 HDI 板" },
+  { source: "2313", target: "3491", type: "supply", label: "低軌衛星板" },
+  { source: "2360", target: "3711", type: "supply", label: "半導體測試設備" },
+  { source: "2351", target: "3711", type: "supply", label: "IC 導線架" },
+
   // --- 集團 / 持股關係 ---------------------------------------------------------
   { source: "2330", target: "3443", type: "group", label: "台積電為創意最大股東(約 35%)" },
   { source: "2330", target: "5347", type: "group", label: "台積電轉投資世界先進(約 28%)" },
@@ -471,6 +496,7 @@ const LINKS = [
   { source: "2317", target: "2354", type: "group", label: "鴻準屬鴻海集團" },
   { source: "2324", target: "2312", type: "group", label: "金寶與仁寶同屬金仁寶集團" },
   { source: "2312", target: "2368", type: "group", label: "金寶為金像電大股東" },
+  { source: "2317", target: "3481", type: "group", label: "群創由鴻海集團創立,淵源深厚" },
 
   // --- 互相持股(雙向策略聯盟)--------------------------------------------------
   { source: "3036", target: "5269", type: "cross", label: "文曄與祥碩相互私募結盟(2020),雙方互相持股" },
@@ -516,7 +542,37 @@ const LINKS = [
   { source: "6269", target: "4958", type: "rival", label: "軟板競爭" },
   { source: "2385", target: "2301", type: "rival", label: "電源供應器競爭" },
   { source: "3706", target: "2356", type: "rival", label: "伺服器代工競爭" },
+  { source: "3481", target: "2409", type: "rival", label: "面板雙虎競爭" },
+  { source: "6213", target: "6274", type: "rival", label: "銅箔基板競爭" },
 ];
+
+// =============================================================================
+// 供應線營收貢獻(%,約略值)— key 為 "供應方|客戶",值為該客戶/產品線
+// 約佔供應方營收的比重。依年報客戶集中度、法說與公開報導人工整理,僅供參考。
+// =============================================================================
+const SUPPLY_PCT = {
+  "2330|AAPL": 25, "2330|NVDA": 20, "2330|AMD": 8, "2330|QCOM": 6, "2330|INTC": 3,
+  "2317|AAPL": 45, "2317|NVDA": 12,
+  "4938|AAPL": 55,
+  "3008|AAPL": 65, "3406|AAPL": 70,
+  "4958|AAPL": 55, "6269|AAPL": 60, "2313|AAPL": 35,
+  "2382|CSP": 45,
+  "6669|CSP": 95,
+  "3661|CSP": 45,
+  "2449|NVDA": 30,
+  "3231|NVDA": 30,
+  "2345|CSP": 60,
+  "3680|2330": 65,
+  "6510|2454": 40,
+  "3592|2409": 65,
+  "6147|3034": 30,
+};
+LINKS.forEach((l) => {
+  if (l.type === "supply") {
+    const p = SUPPLY_PCT[`${l.source}|${l.target}`];
+    if (p) l.pct = p;
+  }
+});
 
 // 供 app.js 使用
 // =============================================================================
@@ -644,6 +700,12 @@ const PRODUCTS = {
   "2385": ["筆電鍵盤模組", "筆電/視訊鏡頭模組", "電源供應器(群電)", "智慧家居裝置"],
   "3706": ["雲端/企業伺服器", "車載電子與導航", "工業物聯網"],
   "2312": ["事務機/印表機代工", "伺服器與網通週邊代工", "智慧裝置"],
+  "3481": ["電視/IT 液晶面板", "車載與商用顯示", "醫療與特殊顯示"],
+  "3653": ["均熱片/GPU 金屬蓋板", "IC 導線架", "散熱基板"],
+  "6213": ["銅箔基板(CCL)", "高速低損耗板材", "膠片(Prepreg)"],
+  "2313": ["手機 HDI 板", "低軌衛星板", "車用與伺服器板"],
+  "2360": ["半導體/SoC 測試設備", "電源與電池測試設備", "智慧製造檢測系統"],
+  "2351": ["IC 導線架", "LED 導線架", "精密沖壓件"],
 
   // --- 海外要角 ---------------------------------------------------------------
   "NVDA": ["AI GPU(B200/GB200)", "資料中心平台與 NVLink 網通", "GeForce 遊戲顯卡", "車用自駕平台", "CUDA 軟體生態系"],
@@ -756,6 +818,12 @@ const SHARES = {
   "2385": [35, 25, 30, null],
   "3706": [55, 20, null],
   "2312": [40, 25, null],
+  "3481": [60, 20, null],
+  "3653": [55, 30, null],
+  "6213": [65, 20, null],
+  "2313": [55, 15, 15],
+  "2360": [40, 30, null],
+  "2351": [70, null, null],
   "NVDA": [88, null, 8, null, null],
   "AAPL": [50, 17, 8, null, 24],
   "AMD":  [30, 20, 28, 8, 10],
