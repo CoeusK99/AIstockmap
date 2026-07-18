@@ -5,6 +5,18 @@
   const sectorById = new Map(sectors.map((s) => [s.id, s]));
   const nodeById = new Map(nodes.map((n) => [n.id, n]));
 
+  // 欄內子族群(產業鏈檢視分區 + 摺疊)
+  const SUBS = window.MAP_SUBS || {};
+  const subOrder = {};
+  Object.entries(SUBS).forEach(([sec, groups]) => { subOrder[sec] = Object.keys(groups); });
+  const membersBySub = {};
+  nodes.forEach((n) => {
+    (membersBySub[n.sector] ||= {});
+    membersBySub[n.sector][n.sub] = (membersBySub[n.sector][n.sub] || 0) + 1;
+  });
+  const collapsed = new Set(); // "sector|sub"
+  const subKey = (n) => `${n.sector}|${n.sub}`;
+
   // ---------- 產業鏈階段(左 = 上游,右 = 下游)----------
   const STAGES = [
     { label: "設備・材料",   sectors: ["equip"] },
@@ -58,9 +70,10 @@
   });
 
   const root = svg.append("g");
-  const bgLayer = root.append("g");        // 欄位底色(跟著縮放)
+  const bgLayer = root.append("g");        // 欄位底色與子族群標題(跟著縮放)
   const linkLayer = root.append("g");
   const nodeLayer = root.append("g");
+  const bubbleLayer = root.append("g");    // 摺疊後的子族群氣泡
   const headerLayer = svg.append("g");     // 欄位標題(固定在畫面頂端,不跟縮放)
 
   const style = document.createElement("style");
@@ -89,6 +102,22 @@
     }
     #graph .node .tk { fill: var(--text-muted); stroke-width: 2.5px; }
     #graph .faded { opacity: 0.08; }
+    #graph .subhidden { display: none; }
+    #graph .sub-head { cursor: pointer; }
+    #graph .sub-head text {
+      font-size: 10px; fill: var(--text-muted);
+      paint-order: stroke; stroke: var(--surface-1); stroke-width: 3px;
+    }
+    #graph .sub-head:hover text { fill: var(--text-primary); }
+    #graph .bubble { cursor: pointer; }
+    #graph .bubble circle { stroke: var(--surface-1); stroke-width: 2; }
+    #graph .bubble .cnt {
+      fill: #fff; font-size: 11px; font-weight: 700; text-anchor: middle;
+    }
+    #graph .bubble .nm {
+      fill: var(--text-primary); font-size: 10.5px; text-anchor: middle;
+      paint-order: stroke; stroke: var(--surface-1); stroke-width: 3px;
+    }
     #graph .link-label {
       display: none; font-size: 9.5px; fill: var(--text-secondary);
       text-anchor: middle; pointer-events: none;
@@ -201,11 +230,34 @@
     .text((d) => d.id);
 
   // ---------- 力導向模擬(依模式配置)----------
-  const stageX = (n) => {
-    const i = stageOfSector.get(n.sector) ?? 4;
-    return ((i + 0.5) / STAGES.length) * width;
-  };
-  const chainY = (n) => HEADER_H + (Y_BIAS[n.sector] ?? 0.5) * (height - HEADER_H);
+  const stageXOf = (sec) => ((stageOfSector.get(sec) ?? 4) + 0.5) / STAGES.length * width;
+  const stageX = (n) => stageXOf(n.sector);
+
+  // 產業鏈檢視:每欄依子族群切成垂直帶;摺疊的族群只留一小段
+  let bands = {}; // sector -> sub -> { y0, cy, h }
+  function computeBands() {
+    bands = {};
+    const top = HEADER_H + 22;
+    const span = Math.max(height - 12 - top, 240);
+    STAGES.forEach((stage) => {
+      const entries = [];
+      stage.sectors.forEach((sec) =>
+        (subOrder[sec] || []).forEach((sub) => {
+          const count = membersBySub[sec]?.[sub] || 0;
+          if (count) entries.push({ sec, sub, count });
+        })
+      );
+      const weight = (e) => (collapsed.has(`${e.sec}|${e.sub}`) ? 1.7 : e.count + 1.1);
+      const total = entries.reduce((s, e) => s + weight(e), 0) || 1;
+      let y = top;
+      entries.forEach((e) => {
+        const h = (span * weight(e)) / total;
+        (bands[e.sec] ||= {})[e.sub] = { y0: y, cy: y + h / 2 + 5, h };
+        y += h;
+      });
+    });
+  }
+  const chainY = (n) => bands[n.sector]?.[n.sub]?.cy ?? HEADER_H + 0.5 * (height - HEADER_H);
 
   // 初始位置先落在各自欄位,收斂快、交錯少
   nodes.forEach((n, i) => {
@@ -223,10 +275,11 @@
 
   function configureForces() {
     if (mode === "chain") {
+      computeBands();
       sim.force("link").distance(120).strength(0.02);
-      sim.force("charge").strength(-130);
+      sim.force("charge").strength(-110);
       sim.force("x").x(stageX).strength(0.95);
-      sim.force("y").y(chainY).strength(0.06);
+      sim.force("y").y(chainY).strength(0.14);
     } else {
       sim.force("link").distance((l) => (l.type === "group" ? 60 : 90)).strength(0.25);
       sim.force("charge").strength(-320);
@@ -274,7 +327,97 @@
         g.append("path").attr("class", "stage-arrow-head").attr("d", "M0,18 l-6,-3.5 v7 z");
       }
     });
+
+    // 子族群小標題(帶起點,點擊摺疊/展開)
+    STAGES.forEach((stage, i) => {
+      const entries = [];
+      stage.sectors.forEach((sec) =>
+        (subOrder[sec] || []).forEach((sub) => {
+          if (membersBySub[sec]?.[sub]) entries.push({ sec, sub });
+        })
+      );
+      if (entries.length < 2) return; // 單一族群的欄不需要分區標題
+      const x0 = i * colW;
+      entries.forEach(({ sec, sub }) => {
+        const b = bands[sec]?.[sub];
+        if (!b) return;
+        const key = `${sec}|${sub}`;
+        const isC = collapsed.has(key);
+        const g = bgLayer.append("g").attr("class", "sub-head");
+        g.append("text")
+          .attr("x", x0 + 6)
+          .attr("y", b.y0 + 10)
+          .text(`${isC ? "▸" : "▾"} ${sub}(${membersBySub[sec][sub]})`);
+        g.on("click", (ev) => {
+          ev.stopPropagation();
+          toggleSub(sec, sub);
+        });
+      });
+    });
+
     updateHeaders(d3.zoomTransform(svg.node()));
+  }
+
+  // ---------- 子族群摺疊 ----------
+  function applyCollapse() {
+    nodes.forEach((n) => {
+      const isC = mode === "chain" && collapsed.has(subKey(n));
+      if (isC) {
+        const b = bands[n.sector]?.[n.sub];
+        n.fx = stageX(n);
+        n.fy = b ? b.cy : n.y;
+      } else if (n._pinned) {
+        n.fx = null;
+        n.fy = null;
+      }
+      n._pinned = isC;
+    });
+    nodeSel.classed("subhidden", (d) => mode === "chain" && collapsed.has(subKey(d)));
+    linkG.classed(
+      "subhidden",
+      (d) => mode === "chain" && (collapsed.has(subKey(d.source)) || collapsed.has(subKey(d.target)))
+    );
+    renderBubbles();
+  }
+
+  function renderBubbles() {
+    const data =
+      mode === "chain"
+        ? [...collapsed]
+            .map((key) => {
+              const [sec, sub] = key.split("|");
+              const b = bands[sec]?.[sub];
+              if (!b) return null;
+              return { key, sec, sub, x: stageXOf(sec), y: b.cy, count: membersBySub[sec][sub] };
+            })
+            .filter(Boolean)
+        : [];
+    const sel = bubbleLayer.selectAll("g.bubble").data(data, (d) => d.key);
+    sel.exit().remove();
+    const enter = sel.enter().append("g").attr("class", "bubble");
+    enter.append("circle").attr("r", 15);
+    enter.append("text").attr("class", "cnt").attr("dy", 4);
+    enter.append("text").attr("class", "nm").attr("dy", 30);
+    const all = enter.merge(sel);
+    all.attr("transform", (d) => `translate(${d.x},${d.y})`);
+    all.select("circle").style("fill", (d) => `var(--s-${d.sec})`);
+    all.select(".cnt").text((d) => d.count);
+    all.select(".nm").text((d) => d.sub);
+    all.on("click", (ev, d) => {
+      ev.stopPropagation();
+      toggleSub(d.sec, d.sub);
+    });
+  }
+
+  function toggleSub(sec, sub) {
+    const key = `${sec}|${sub}`;
+    if (collapsed.has(key)) collapsed.delete(key);
+    else collapsed.add(key);
+    configureForces();
+    applyCollapse();
+    drawStages();
+    sim.alpha(0.5).restart();
+    applyFilters();
   }
 
   // 依目前縮放,把螢幕座標的標題對齊各欄位中心
@@ -296,6 +439,7 @@
     height = rect.height;
     configureForces();
     drawStages();
+    applyCollapse();
     sim.alpha(0.5).restart();
   }
   window.addEventListener("resize", resize);
@@ -307,9 +451,10 @@
       if (btn.dataset.mode === mode) return;
       mode = btn.dataset.mode;
       document.querySelectorAll("#layout-toggle button").forEach((b) => b.classList.toggle("on", b.dataset.mode === mode));
-      nodes.forEach((n) => { n.fx = null; n.fy = null; });
+      nodes.forEach((n) => { n.fx = null; n.fy = null; n._pinned = false; });
       configureForces();
       drawStages();
+      applyCollapse();
       sim.alpha(0.9).restart();
       setTimeout(fitView, 1100);
     };
@@ -627,6 +772,13 @@
   const panel = document.getElementById("panel");
 
   function select(id) {
+    // 選到被摺疊族群裡的個股時,先自動展開該族群
+    if (id) {
+      const n = nodeById.get(id);
+      if (n && mode === "chain" && collapsed.has(subKey(n))) {
+        toggleSub(n.sector, n.sub);
+      }
+    }
     state.selected = id;
     applyFilters();
     if (!id) {
