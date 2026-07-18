@@ -490,6 +490,7 @@
     sectors: new Set(),
     tags: new Set(),
     themes: new Set(),
+    eco: new Set(), // 生態系篩選(由面板徽章切換)
     edges: new Set(["supply", "group", "cross", "rival"]),
     selected: null,
     chain: false, // 全鏈追蹤:沿供應線遞迴點亮整條上下游
@@ -500,6 +501,43 @@
   const themesOf = {};
   Object.entries(THEMES).forEach(([name, ids]) =>
     ids.forEach((id) => (themesOf[id] ||= new Set()).add(name)));
+
+  // ---------- 六大生態系歸屬(由關係圖 + 主題自動推導)----------
+  // 錨點的一階供應/集團鄰居 ∪ 對應主題成員。
+  const ECO_DEFS = [
+    ["nvda",  "NVDA 生態"],
+    ["tsmc",  "TSMC 生態"],
+    ["asic",  "ASIC 生態"],
+    ["robot", "Robot 生態"],
+    ["cpo",   "CPO 生態"],
+    ["dc",    "Data Center 生態"],
+  ];
+  const ecoSets = (() => {
+    const nb = (anchor) => {
+      const s = new Set([anchor]);
+      links.forEach((l) => {
+        if (l.type !== "supply" && l.type !== "group") return;
+        if (l.source === anchor) s.add(l.target);
+        if (l.target === anchor) s.add(l.source);
+      });
+      return s;
+    };
+    const uni = (...sets) => {
+      const out = new Set();
+      sets.forEach((s) => (s || []).forEach((x) => out.add(x)));
+      return out;
+    };
+    return {
+      nvda:  nb("NVDA"),
+      tsmc:  nb("2330"),
+      asic:  uni(THEMES["ASIC生態系"], ["2330"]),
+      robot: uni(THEMES["機器人供應鏈"], nb("ROBOT")),
+      cpo:   uni(THEMES["CPO矽光子"]),
+      dc:    uni(nb("CSP"), THEMES["液冷散熱"], THEMES["電力基礎設施"],
+                 THEMES["AI網通"], THEMES["企業級SSD儲存"]),
+    };
+  })();
+  const ecoOf = (id) => ECO_DEFS.filter(([k]) => ecoSets[k].has(id)).map(([k]) => k);
 
   // 供應鏈鄰接表(上游/下游),供全鏈追蹤遍歷
   let upAdj = null;
@@ -533,7 +571,9 @@
     const byTag = state.tags.size === 0 || (n.tags || []).some((t) => state.tags.has(t));
     const byTheme = state.themes.size === 0 ||
       [...state.themes].some((t) => themesOf[n.id]?.has(t));
-    return bySector && byTag && byTheme;
+    const byEco = state.eco.size === 0 ||
+      [...state.eco].some((k) => ecoSets[k]?.has(n.id));
+    return bySector && byTag && byTheme && byEco;
   };
   const linkVisible = (l) => state.edges.has(l.type) && nodeVisible(l.source) && nodeVisible(l.target);
 
@@ -946,6 +986,25 @@
            </div>`;
 
     const stage = STAGES[stageOfSector.get(n.sector)];
+    const x = n.extra;
+    const memberEcos = ecoOf(n.id);
+    const ecoCard = x
+      ? `<div class="eco-card">
+           <div class="eco-line"><span class="k">核心技術</span>${esc(x.t)}</div>
+           <div class="eco-line"><span class="k">市場地位</span>${esc(x.r)}</div>
+           ${x.a ? `<div class="eco-line"><span class="k">替代供應商</span>${esc(x.a)}</div>` : ""}
+           <div class="eco-meta">
+             <span class="meta expo-${x.e === "高" ? "hi" : x.e === "中" ? "mid" : "lo"}">AI 曝險 ${x.e}</span>
+             <span class="meta ${x.c ? "yes" : "no"}">AI CapEx ${x.c ? "受惠 ✓" : "非直接"}</span>
+           </div>
+         </div>`
+      : "";
+    const ecoBadges = `<div class="eco-membership">${ECO_DEFS.map(([k, label]) => {
+      const isMember = memberEcos.includes(k);
+      const on = state.eco.has(k);
+      return `<button class="eco-badge${isMember ? " member" : ""}${on ? " on" : ""}" data-eco="${k}"
+        title="${isMember ? "屬於此生態系,點擊篩選整個生態" : "不屬於此生態系,點擊仍可篩選"}">${label} ${isMember ? "✓" : "—"}</button>`;
+    }).join("")}</div>`;
     panel.innerHTML = `
       <button class="panel-close" title="關閉">✕</button>
       <h2>${n.name}</h2>
@@ -958,6 +1017,8 @@
           : ""
       }
       <p class="desc">${n.desc}</p>
+      ${ecoCard}
+      ${ecoBadges}
       ${fundBlock}
       ${prodBlock}
       ${confBlock}
@@ -977,6 +1038,15 @@
         const target = nodeById.get(btn.dataset.id);
         select(target.id);
         centerOn(target);
+      };
+    });
+    panel.querySelectorAll(".eco-badge").forEach((btn) => {
+      btn.onclick = () => {
+        const k = btn.dataset.eco;
+        if (state.eco.has(k)) state.eco.delete(k);
+        else state.eco.add(k);
+        btn.classList.toggle("on", state.eco.has(k));
+        applyFilters();
       };
     });
   }
