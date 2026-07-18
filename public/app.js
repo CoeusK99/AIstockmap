@@ -489,10 +489,17 @@
   const state = {
     sectors: new Set(),
     tags: new Set(),
+    themes: new Set(),
     edges: new Set(["supply", "group", "cross", "rival"]),
     selected: null,
     chain: false, // 全鏈追蹤:沿供應線遞迴點亮整條上下游
   };
+
+  // AI 供應鏈主題:id → 所屬主題集合
+  const THEMES = window.MAP_THEMES || {};
+  const themesOf = {};
+  Object.entries(THEMES).forEach(([name, ids]) =>
+    ids.forEach((id) => (themesOf[id] ||= new Set()).add(name)));
 
   // 供應鏈鄰接表(上游/下游),供全鏈追蹤遍歷
   let upAdj = null;
@@ -524,7 +531,9 @@
   const nodeVisible = (n) => {
     const bySector = state.sectors.size === 0 || state.sectors.has(n.sector);
     const byTag = state.tags.size === 0 || (n.tags || []).some((t) => state.tags.has(t));
-    return bySector && byTag;
+    const byTheme = state.themes.size === 0 ||
+      [...state.themes].some((t) => themesOf[n.id]?.has(t));
+    return bySector && byTag && byTheme;
   };
   const linkVisible = (l) => state.edges.has(l.type) && nodeVisible(l.source) && nodeVisible(l.target);
 
@@ -613,6 +622,23 @@
     };
     chipBox.appendChild(el);
   });
+
+  // ---------- AI 供應鏈十大主題 ----------
+  const themeBox = document.getElementById("theme-chips");
+  if (themeBox) {
+    Object.keys(THEMES).forEach((t) => {
+      const el = document.createElement("span");
+      el.className = "chip theme";
+      el.textContent = t;
+      el.onclick = () => {
+        if (state.themes.has(t)) state.themes.delete(t);
+        else state.themes.add(t);
+        el.classList.toggle("on", state.themes.has(t));
+        applyFilters();
+      };
+      themeBox.appendChild(el);
+    });
+  }
 
   // ---------- 關係線開關 ----------
   document.querySelectorAll("#edge-toggles input[data-type]").forEach((cb) => {
@@ -923,6 +949,7 @@
       <h2>${n.name}</h2>
       <div class="ticker">${n.market === "foreign" ? "海外公司" : `${n.id} · ${n.market === "twse" ? "上市" : "上櫃"}`}</div>
       <div class="sector-chip"><span class="dot" style="background:var(--s-${n.sector})"></span>${sectorById.get(n.sector).name} · ${stage.label}</div>
+      ${themesOf[n.id] ? `<div class="theme-tags">${[...themesOf[n.id]].map((t) => `<span>${t}</span>`).join("")}</div>` : ""}
       ${
         q
           ? `<div class="quote"><span class="price">${q.close}</span><span class="chg ${q.cls}">${q.text}</span><div class="asof">${quoteDate} 收盤</div></div>`
