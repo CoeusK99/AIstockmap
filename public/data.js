@@ -281,6 +281,47 @@ const NODES = [
   { id: "2351", name: "順德",     sector: "equip", tier: 3, market: "twse", tags: [],
     desc: "IC 導線架大廠,封裝關鍵金屬材料供應商。" },
 
+  // --- 2026-07 擴充 IV ---------------------------------------------------------
+  // 設備與材料
+  { id: "2404", name: "漢唐",     sector: "equip", tier: 2, market: "twse", tags: [],
+    desc: "無塵室統包工程龍頭,台積電先進廠房的主要承攬商。" },
+  { id: "6691", name: "洋基工程", sector: "equip", tier: 3, market: "twse", tags: [],
+    desc: "無塵室機電工程廠,半導體廠務工程要角。" },
+  { id: "2467", name: "志聖",     sector: "equip", tier: 3, market: "twse", tags: [],
+    desc: "壓膜/曝光設備廠,先進封裝與 PCB 設備(G2C 聯盟成員)。" },
+  { id: "4749", name: "新應材",   sector: "equip", tier: 3, market: "tpex", tags: [],
+    desc: "光阻劑與顯影材料廠,半導體與面板材料國產化要角。" },
+  // IC 設計
+  { id: "4919", name: "新唐",     sector: "ic", tier: 3, market: "twse", tags: [],
+    desc: "華邦電子公司,微控制器(MCU)大廠,車用與工控布局深。" },
+  { id: "6643", name: "M31",      sector: "ic", tier: 3, market: "tpex", tags: [],
+    desc: "円星科技,高速介面與基礎元件矽智財(IP)公司,台積電 OIP 夥伴。" },
+  // 關鍵零組件
+  { id: "1815", name: "富喬",     sector: "comp", tier: 3, market: "twse", tags: ["AI"],
+    desc: "電子級玻纖布廠,CCL 三大材料之一,AI 板材需求受惠者。" },
+  { id: "3026", name: "禾伸堂",   sector: "comp", tier: 3, market: "twse", tags: [],
+    desc: "高壓/高容 MLCC 利基廠,工控與醫療用被動元件。" },
+  { id: "3023", name: "信邦",     sector: "comp", tier: 2, market: "twse", tags: [],
+    desc: "連接線束整合方案廠,綠能、醫療與半導體設備線束多元布局。" },
+  { id: "3483", name: "力致",     sector: "comp", tier: 3, market: "twse", tags: ["伺服器"],
+    desc: "散熱模組廠,筆電與伺服器散熱方案供應商。" },
+  { id: "8996", name: "高力",     sector: "comp", tier: 3, market: "twse", tags: ["AI", "伺服器"],
+    desc: "板式熱交換器廠,AI 資料中心液冷熱交換需求受惠者。" },
+  { id: "3693", name: "營邦",     sector: "comp", tier: 3, market: "twse", tags: ["伺服器"],
+    desc: "伺服器機殼與準系統廠,美系資料中心白牌機構供應商。" },
+  { id: "3211", name: "順達",     sector: "comp", tier: 3, market: "twse", tags: ["伺服器"],
+    desc: "電池模組廠,筆電電池與伺服器備援電池(BBU)供應商。" },
+  { id: "3163", name: "波若威",   sector: "comp", tier: 3, market: "tpex", tags: ["AI"],
+    desc: "光通訊元件廠,光纖跳線與資料中心光連接元件。" },
+  // 品牌與網通
+  { id: "3380", name: "明泰",     sector: "brand", tier: 3, market: "twse", tags: ["網通"],
+    desc: "仁寶集團網通設備廠,電信與企業網路設備 ODM。" },
+  // 組裝與代工
+  { id: "2352", name: "佳世達",   sector: "ems", tier: 2, market: "twse", tags: [],
+    desc: "明基佳世達集團旗艦,顯示器代工起家,醫療與網通艦隊多角化。" },
+  { id: "3005", name: "神基",     sector: "ems", tier: 3, market: "twse", tags: [],
+    desc: "神達集團強固型電腦廠,Getac 品牌行銷全球。" },
+
   // --- 海外要角(供應鏈上下游的境外錨點)--------------------------------------
   { id: "NVDA", name: "輝達",     sector: "abroad", tier: 1, market: "foreign", tags: ["AI"],
     desc: "AI GPU 絕對龍頭,晶片由台積電製造,整機由台灣代工廠組裝 — 台灣 AI 供應鏈的最大需求來源。" },
@@ -465,6 +506,23 @@ const LINKS = [
   { source: "2360", target: "3711", type: "supply", label: "半導體測試設備" },
   { source: "2351", target: "3711", type: "supply", label: "IC 導線架" },
 
+  // --- 2026-07 擴充 IV:供應鏈 -------------------------------------------------
+  { source: "2404", target: "2330", type: "supply", label: "無塵室統包工程" },
+  { source: "6691", target: "2330", type: "supply", label: "無塵室機電工程" },
+  { source: "2467", target: "3711", type: "supply", label: "壓合/曝光設備(先進封裝)" },
+  { source: "4749", target: "2330", type: "supply", label: "光阻劑與顯影材料" },
+  { source: "4919", target: "2395", type: "supply", label: "工控 MCU" },
+  { source: "6643", target: "2330", type: "supply", label: "矽智財授權(OIP 夥伴)" },
+  { source: "1815", target: "2383", type: "supply", label: "電子級玻纖布" },
+  { source: "1815", target: "6274", type: "supply", label: "玻纖布" },
+  { source: "3026", target: "2308", type: "supply", label: "高壓 MLCC" },
+  { source: "3483", target: "2382", type: "supply", label: "筆電/伺服器散熱模組" },
+  { source: "8996", target: "CSP",  type: "supply", label: "液冷熱交換器(經系統整合商)" },
+  { source: "3693", target: "CSP",  type: "supply", label: "白牌伺服器機殼/準系統" },
+  { source: "3211", target: "2382", type: "supply", label: "伺服器備援電池(BBU)" },
+  { source: "3163", target: "2345", type: "supply", label: "光纖跳線/光連接元件" },
+  { source: "2352", target: "PCB",  type: "supply", label: "顯示器/投影機代工" },
+
   // --- 集團 / 持股關係 ---------------------------------------------------------
   { source: "2330", target: "3443", type: "group", label: "台積電為創意最大股東(約 35%)" },
   { source: "2330", target: "5347", type: "group", label: "台積電轉投資世界先進(約 28%)" },
@@ -497,6 +555,10 @@ const LINKS = [
   { source: "2324", target: "2312", type: "group", label: "金寶與仁寶同屬金仁寶集團" },
   { source: "2312", target: "2368", type: "group", label: "金寶為金像電大股東" },
   { source: "2317", target: "3481", type: "group", label: "群創由鴻海集團創立,淵源深厚" },
+  { source: "2344", target: "4919", type: "group", label: "新唐為華邦電子公司" },
+  { source: "2324", target: "3380", type: "group", label: "明泰屬仁寶集團" },
+  { source: "2353", target: "2352", type: "group", label: "佳世達(原明基)自宏碁分家" },
+  { source: "3706", target: "3005", type: "group", label: "神基屬神達集團" },
 
   // --- 互相持股(雙向策略聯盟)--------------------------------------------------
   { source: "3036", target: "5269", type: "cross", label: "文曄與祥碩相互私募結盟(2020),雙方互相持股" },
@@ -544,6 +606,14 @@ const LINKS = [
   { source: "3706", target: "2356", type: "rival", label: "伺服器代工競爭" },
   { source: "3481", target: "2409", type: "rival", label: "面板雙虎競爭" },
   { source: "6213", target: "6274", type: "rival", label: "銅箔基板競爭" },
+  { source: "2404", target: "6196", type: "rival", label: "廠務工程競爭" },
+  { source: "2404", target: "6691", type: "rival", label: "無塵室工程競爭" },
+  { source: "3026", target: "2327", type: "rival", label: "MLCC 競爭(利基 vs 標準)" },
+  { source: "3023", target: "3665", type: "rival", label: "連接線束競爭" },
+  { source: "3483", target: "3324", type: "rival", label: "散熱模組競爭" },
+  { source: "3693", target: "8210", type: "rival", label: "伺服器機殼競爭" },
+  { source: "6643", target: "3529", type: "rival", label: "矽智財族群競爭" },
+  { source: "3380", target: "3596", type: "rival", label: "網通 ODM 競爭" },
 ];
 
 // =============================================================================
@@ -580,6 +650,8 @@ const SUPPLY_PCT = {
   "4961|3481": 45,
   "3105|AAPL": 35,
   "2301|CSP": 30,
+  "2404|2330": 55,
+  "6691|2330": 40,
 };
 LINKS.forEach((l) => {
   if (l.type === "supply") {
@@ -721,6 +793,25 @@ const PRODUCTS = {
   "2360": ["半導體/SoC 測試設備", "電源與電池測試設備", "智慧製造檢測系統"],
   "2351": ["IC 導線架", "LED 導線架", "精密沖壓件"],
 
+  // --- 2026-07 擴充 IV ---------------------------------------------------------
+  "2404": ["無塵室統包工程", "機電系統工程", "製程管路工程"],
+  "6691": ["無塵室機電工程", "廠務系統整合", "二次配工程"],
+  "2467": ["壓膜/壓合設備", "曝光顯影設備", "烤箱設備"],
+  "4749": ["光阻劑與顯影液", "彩色濾光片材料", "特用化學品"],
+  "4919": ["微控制器(MCU)", "車用/工控 IC", "音訊與電源 IC", "6 吋晶圓代工"],
+  "6643": ["高速介面矽智財(SerDes)", "基礎元件 IP", "IP 授權與權利金"],
+  "1815": ["電子級玻纖布", "玻纖紗", "特殊規格玻纖材料"],
+  "3026": ["高壓/高容 MLCC", "電子零組件通路", "陶瓷基板"],
+  "3023": ["工業/綠能線束", "醫療連接方案", "車用線束", "半導體設備線束"],
+  "3483": ["筆電散熱模組", "伺服器散熱", "均熱片"],
+  "8996": ["板式熱交換器", "資料中心液冷熱交換", "工業熱能設備"],
+  "3693": ["伺服器機殼/準系統", "白牌資料中心機構", "工業電腦機殼"],
+  "3211": ["筆電電池模組", "伺服器備援電池(BBU)", "電動工具電池"],
+  "3163": ["光纖跳線與元件", "資料中心光連接", "光被動元件"],
+  "3380": ["電信網通設備(ODM)", "企業網路設備", "光纖接取設備"],
+  "2352": ["顯示器與投影機代工", "醫療事業", "網通與智能方案(艦隊)"],
+  "3005": ["強固型筆電/平板(Getac)", "航太國防電腦", "精密機構件"],
+
   // --- 海外要角 ---------------------------------------------------------------
   "NVDA": ["AI GPU(B200/GB200)", "資料中心平台與 NVLink 網通", "GeForce 遊戲顯卡", "車用自駕平台", "CUDA 軟體生態系"],
   "AAPL": ["iPhone", "Mac 與 iPad", "Apple Watch 與 AirPods", "自研 A/M 系列晶片", "訂閱服務"],
@@ -838,6 +929,23 @@ const SHARES = {
   "2313": [55, 15, 15],
   "2360": [40, 30, null],
   "2351": [70, null, null],
+  "2404": [60, 25, null],
+  "6691": [65, null, null],
+  "2467": [40, 30, null],
+  "4749": [50, 25, null],
+  "4919": [50, 20, null, 15],
+  "6643": [45, 35, null],
+  "1815": [70, 20, null],
+  "3026": [45, 35, null],
+  "3023": [35, 20, 20, null],
+  "3483": [50, 25, null],
+  "8996": [50, 30, null],
+  "3693": [60, 25, null],
+  "3211": [50, 25, null],
+  "3163": [50, 30, null],
+  "3380": [55, 25, null],
+  "2352": [45, 20, 25],
+  "3005": [60, 20, null],
   "NVDA": [88, null, 8, null, null],
   "AAPL": [50, 17, 8, null, 24],
   "AMD":  [30, 20, 28, 8, 10],
