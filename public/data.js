@@ -460,6 +460,8 @@ const NODES = [
     desc: "惠普、戴爾、聯想等 PC 品牌 — 台灣筆電代工五哥的主要客戶。" },
   { id: "SAT",  name: "低軌衛星巨頭", sector: "abroad", tier: 2, market: "foreign", tags: ["網通"],
     desc: "SpaceX 星鏈、亞馬遜 Kuiper 等低軌衛星業者 — 台灣地面設備、天線與 PCB 供應鏈的新終端客戶。" },
+  { id: "ROBOT", name: "機器人應用端", sector: "abroad", tier: 2, market: "foreign", tags: ["AI"],
+    desc: "人形機器人、AMR 與智慧工廠應用市場(輝達生態系推動)— 台灣傳動、視覺與自動化供應鏈的新需求端。" },
 ];
 
 const LINKS = [
@@ -697,9 +699,21 @@ const LINKS = [
   { source: "2313", target: "SAT",  type: "supply", label: "低軌衛星 PCB" },
   { source: "CSP",  target: "6689", type: "supply", label: "公有雲代理授權" },
   { source: "CSP",  target: "3029", type: "supply", label: "軟體/資安產品代理" },
-  { source: "CSP",  target: "6214", type: "supply", label: "雲端與軟體授權" },
+  { source: "6214", target: "CSP",  type: "supply", label: "雲端代理與系統整合" },
   { source: "CSP",  target: "6763", type: "supply", label: "雲端基礎設施" },
   { source: "6409", target: "CSP",  type: "supply", label: "UPS(資料中心電力備援)" },
+
+  // --- 2026-07 擴充 VIII:五大技術鏈連線補齊 -----------------------------------
+  { source: "NVDA", target: "ROBOT", type: "supply", label: "機器人運算平台(Jetson/Isaac)" },
+  { source: "2049", target: "ROBOT", type: "supply", label: "精密傳動組件" },
+  { source: "2359", target: "ROBOT", type: "supply", label: "AI 視覺與控制方案" },
+  { source: "2464", target: "ROBOT", type: "supply", label: "自動化整合方案" },
+  { source: "3363", target: "6442", type: "supply", label: "光纖陣列/連接元件" },
+  { source: "4977", target: "CSP",  type: "supply", label: "800G 光模組(資料中心)" },
+  { source: "1717", target: "2303", type: "supply", label: "電子級溶劑" },
+  { source: "4768", target: "2303", type: "supply", label: "特殊電子氣體" },
+  { source: "5234", target: "2303", type: "supply", label: "半導體材料" },
+  { source: "6690", target: "2412", type: "supply", label: "資安監控防護(SOC)" },
 
   // --- 集團 / 持股關係 ---------------------------------------------------------
   { source: "2330", target: "3443", type: "group", label: "台積電為創意最大股東(約 35%)" },
@@ -821,6 +835,7 @@ const LINKS = [
   { source: "6689", target: "6214", type: "rival", label: "雲端服務競爭" },
   { source: "6285", target: "3380", type: "rival", label: "網通 ODM 競爭" },
   { source: "6409", target: "2308", type: "rival", label: "UPS 電源競爭" },
+  { source: "6166", target: "2395", type: "rival", label: "工業電腦競爭" },
 ];
 
 // =============================================================================
@@ -924,7 +939,7 @@ const SUBS = {
     "軟體與資安": ["3029", "6214", "6690", "6763", "6689"],
   },
   abroad: {
-    "海外要角": ["NVDA", "AAPL", "AMD", "QCOM", "INTC", "MU", "CSP", "PCB", "SAT"],
+    "海外要角": ["NVDA", "AAPL", "AMD", "QCOM", "INTC", "MU", "CSP", "PCB", "SAT", "ROBOT"],
   },
 };
 {
@@ -1161,6 +1176,7 @@ const PRODUCTS = {
   "CSP":  ["公有雲平台", "自研 AI 晶片(TPU 等)", "超大型資料中心", "AI 服務與大型模型"],
   "PCB":  ["商用與消費筆電", "桌上型電腦", "伺服器與儲存設備", "顯示器與周邊"],
   "SAT":  ["低軌衛星寬頻服務", "衛星製造與發射", "地面設備與天線採購"],
+  "ROBOT": ["人形/工業機器人平台", "自主移動機器人(AMR)", "智慧工廠應用"],
 };
 // =============================================================================
 // 產品營收佔比(%,約略值)— 與 PRODUCTS 同序對齊,null = 未揭露/難以拆分。
