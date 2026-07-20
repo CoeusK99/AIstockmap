@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-19",
+  "updated": "2026-07-20",
   "sources": [
     "PTT 股票板",
     "鉅亨網台股新聞",
@@ -76,12 +76,20 @@
     ],
     "2330": [
       {
-        "date": "2026-07-19",
+        "date": "2026-07-20",
         "source": "鉅亨",
         "author": "鉅亨網",
-        "text": "台積電未來三年資本支出逾2千億美元 廠務工程第一波受惠",
+        "text": "〈台股盤後〉台積電反彈也難止跌  震盪逾千點收跌221點守住4萬2",
         "heat": "",
-        "url": "https://news.cnyes.com/news/id/6538859"
+        "url": "https://news.cnyes.com/news/id/6540391"
+      },
+      {
+        "date": "2026-07-20",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "台積電獨撐大局！櫃買狂洗緊鄰「極限落底區」，這些被錯殺族群甜甜價浮現！",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6540579"
       },
       {
         "date": "2026-07-19",
@@ -92,12 +100,12 @@
         "url": "https://news.cnyes.com/news/id/6539415"
       },
       {
-        "date": "2026-07-18",
+        "date": "2026-07-19",
         "source": "鉅亨",
         "author": "鉅亨網",
-        "text": "大摩調升台積電目標價！AI擴產能否撐住毛利率？",
+        "text": "台積電未來三年資本支出逾2千億美元 廠務工程第一波受惠",
         "heat": "",
-        "url": "https://news.cnyes.com/news/id/6539250"
+        "url": "https://news.cnyes.com/news/id/6538859"
       },
       {
         "date": "2026-07-18",
@@ -108,28 +116,20 @@
         "url": "https://news.cnyes.com/news/id/6539108"
       },
       {
-        "date": "2026-07-17",
+        "date": "2026-07-18",
         "source": "鉅亨",
         "author": "鉅亨網",
-        "text": "【量大強漲股整理】【台股大崩盤】台積電「利多出盡」？別逃！我只做這件事!",
+        "text": "大摩調升台積電目標價！AI擴產能否撐住毛利率？",
         "heat": "",
-        "url": "https://news.cnyes.com/news/id/6538814"
+        "url": "https://news.cnyes.com/news/id/6539250"
       },
       {
         "date": "2026-07-17",
         "source": "鉅亨",
         "author": "鉅亨網",
-        "text": "台股崩近3千點 外資殺出史上第一大賣超1890億元 狂砍台積電千億元",
+        "text": "台積電法說利多卻遭無情摜殺逾6%跌破季線 市值蒸發近4兆元",
         "heat": "",
-        "url": "https://news.cnyes.com/news/id/6538789"
-      },
-      {
-        "date": "2026-07-17",
-        "source": "鉅亨",
-        "author": "鉅亨網",
-        "text": "AI狂潮踩剎車！台積電財報報喜卻血洗亞股，台股史上最大跌點寫紀錄",
-        "heat": "",
-        "url": "https://news.cnyes.com/news/id/6538897"
+        "url": "https://news.cnyes.com/news/id/6538326"
       },
       {
         "date": "2026-07-17",
@@ -143,17 +143,17 @@
         "date": "2026-07-17",
         "source": "鉅亨",
         "author": "鉅亨網",
-        "text": "台積電法說利多卻遭無情摜殺逾6%跌破季線 市值蒸發近4兆元",
+        "text": "AI狂潮踩剎車！台積電財報報喜卻血洗亞股，台股史上最大跌點寫紀錄",
         "heat": "",
-        "url": "https://news.cnyes.com/news/id/6538326"
+        "url": "https://news.cnyes.com/news/id/6538897"
       },
       {
-        "date": "2026-07-16",
+        "date": "2026-07-17",
         "source": "鉅亨",
         "author": "鉅亨網",
-        "text": "鉅亨速報 - Factset 最新調查：台積電(2330-TW)目標價調升至3090元，幅度約3%",
+        "text": "台股崩近3千點 外資殺出史上第一大賣超1890億元 狂砍台積電千億元",
         "heat": "",
-        "url": "https://news.cnyes.com/news/id/6537320"
+        "url": "https://news.cnyes.com/news/id/6538789"
       }
     ],
     "2356": [
@@ -258,6 +258,16 @@
         "url": "https://finance.yahoo.com/markets/stocks/articles/nanya-technology-corp-tpe-2408-190015806.html?.tsrc=rss"
       }
     ],
+    "2409": [
+      {
+        "date": "2026-07-20",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "指數隨時準備大反撲、大立光、中美晶、友達、群創",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6540637"
+      }
+    ],
     "2454": [
       {
         "date": "2026-07-18",
@@ -305,6 +315,14 @@
       }
     ],
     "3008": [
+      {
+        "date": "2026-07-20",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "指數隨時準備大反撲、大立光、中美晶、友達、群創",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6540637"
+      },
       {
         "date": "2026-07-18",
         "source": "鉅亨",
@@ -360,6 +378,16 @@
         "url": "https://news.cnyes.com/news/id/6536550"
       }
     ],
+    "3481": [
+      {
+        "date": "2026-07-20",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "指數隨時準備大反撲、大立光、中美晶、友達、群創",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6540637"
+      }
+    ],
     "4749": [
       {
         "date": "2026-07-17",
@@ -391,6 +419,14 @@
       }
     ],
     "5483": [
+      {
+        "date": "2026-07-20",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "指數隨時準備大反撲、大立光、中美晶、友達、群創",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6540637"
+      },
       {
         "date": "2026-07-17",
         "source": "鉅亨",
