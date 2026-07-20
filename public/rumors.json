@@ -79,25 +79,17 @@
         "date": "2026-07-20",
         "source": "鉅亨",
         "author": "鉅亨網",
-        "text": "〈台股盤後〉台積電反彈也難止跌  震盪逾千點收跌221點守住4萬2",
-        "heat": "",
-        "url": "https://news.cnyes.com/news/id/6540391"
-      },
-      {
-        "date": "2026-07-20",
-        "source": "鉅亨",
-        "author": "鉅亨網",
         "text": "台積電獨撐大局！櫃買狂洗緊鄰「極限落底區」，這些被錯殺族群甜甜價浮現！",
         "heat": "",
         "url": "https://news.cnyes.com/news/id/6540579"
       },
       {
-        "date": "2026-07-19",
+        "date": "2026-07-20",
         "source": "鉅亨",
         "author": "鉅亨網",
-        "text": "鉅亨速報 - Factset 最新調查：台積電(2330-TW)EPS預估上修至107.74元，預估目標價為3160元",
+        "text": "〈台股盤後〉台積電反彈也難止跌  震盪逾千點收跌221點守住4萬2",
         "heat": "",
-        "url": "https://news.cnyes.com/news/id/6539415"
+        "url": "https://news.cnyes.com/news/id/6540391"
       },
       {
         "date": "2026-07-19",
@@ -108,12 +100,12 @@
         "url": "https://news.cnyes.com/news/id/6538859"
       },
       {
-        "date": "2026-07-18",
+        "date": "2026-07-19",
         "source": "鉅亨",
         "author": "鉅亨網",
-        "text": "台積電法說、新青安3.0來了、台股史詩級崩跌2953點 本周大事回顧",
+        "text": "鉅亨速報 - Factset 最新調查：台積電(2330-TW)EPS預估上修至107.74元，預估目標價為3160元",
         "heat": "",
-        "url": "https://news.cnyes.com/news/id/6539108"
+        "url": "https://news.cnyes.com/news/id/6539415"
       },
       {
         "date": "2026-07-18",
@@ -124,20 +116,20 @@
         "url": "https://news.cnyes.com/news/id/6539250"
       },
       {
-        "date": "2026-07-17",
+        "date": "2026-07-18",
         "source": "鉅亨",
         "author": "鉅亨網",
-        "text": "台積電法說利多卻遭無情摜殺逾6%跌破季線 市值蒸發近4兆元",
+        "text": "台積電法說、新青安3.0來了、台股史詩級崩跌2953點 本周大事回顧",
         "heat": "",
-        "url": "https://news.cnyes.com/news/id/6538326"
+        "url": "https://news.cnyes.com/news/id/6539108"
       },
       {
         "date": "2026-07-17",
         "source": "鉅亨",
         "author": "鉅亨網",
-        "text": "看台積電的法說會時除了先進製程，你還可以專注這個產業",
+        "text": "台股崩近3千點 外資殺出史上第一大賣超1890億元 狂砍台積電千億元",
         "heat": "",
-        "url": "https://news.cnyes.com/news/id/6538949"
+        "url": "https://news.cnyes.com/news/id/6538789"
       },
       {
         "date": "2026-07-17",
@@ -151,9 +143,17 @@
         "date": "2026-07-17",
         "source": "鉅亨",
         "author": "鉅亨網",
-        "text": "台股崩近3千點 外資殺出史上第一大賣超1890億元 狂砍台積電千億元",
+        "text": "看台積電的法說會時除了先進製程，你還可以專注這個產業",
         "heat": "",
-        "url": "https://news.cnyes.com/news/id/6538789"
+        "url": "https://news.cnyes.com/news/id/6538949"
+      },
+      {
+        "date": "2026-07-17",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "台積電法說利多卻遭無情摜殺逾6%跌破季線 市值蒸發近4兆元",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6538326"
       }
     ],
     "2356": [
@@ -483,6 +483,14 @@
       }
     ],
     "INTC": [
+      {
+        "date": "2026-07-20",
+        "source": "Yahoo",
+        "author": "Yahoo 股市新聞",
+        "text": "Is Intel (INTC) Stock a Buy Before Q2 Earnings?",
+        "heat": "",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/intel-intc-stock-buy-q2-170655255.html?.tsrc=rss"
+      },
       {
         "date": "2026-07-14",
         "source": "Yahoo",
