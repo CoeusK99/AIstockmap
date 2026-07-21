@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-20",
+  "updated": "2026-07-21",
   "sources": [
     "PTT 股票板",
     "鉅亨網台股新聞",
@@ -57,6 +57,14 @@
       }
     ],
     "2327": [
+      {
+        "date": "2026-07-21",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "台股重回到季線之上、上詮、國巨、華邦電",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6541675"
+      },
       {
         "date": "2026-07-18",
         "source": "鉅亨",
@@ -156,6 +164,26 @@
         "url": "https://news.cnyes.com/news/id/6538326"
       }
     ],
+    "2344": [
+      {
+        "date": "2026-07-21",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "台股重回到季線之上、上詮、國巨、華邦電",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6541675"
+      }
+    ],
+    "2353": [
+      {
+        "date": "2026-07-21",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "宏碁Q2在美個人電腦市占率位居前五 年增與季增雙居冠",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6541447"
+      }
+    ],
     "2356": [
       {
         "date": "2026-07-16",
@@ -210,6 +238,16 @@
         "url": "https://finance.yahoo.com/news/chroma-ate-inc-tpe-2360-010101235.html?.tsrc=rss"
       }
     ],
+    "2376": [
+      {
+        "date": "2026-07-21",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "技嘉旗下孫公司技宸前進資本市場 7/22舉行興櫃前法說會",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6541559"
+      }
+    ],
     "2377": [
       {
         "date": "2026-07-16",
@@ -239,6 +277,14 @@
       }
     ],
     "2395": [
+      {
+        "date": "2026-07-21",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "〈焦點股〉研華飆漲停完成填息 站回5日線",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6541406"
+      },
       {
         "date": "2026-07-17",
         "source": "鉅亨",
@@ -340,6 +386,16 @@
         "url": "https://news.cnyes.com/news/id/6538818"
       }
     ],
+    "3017": [
+      {
+        "date": "2026-07-21",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "《價值型投資 最新產業研究報告》雙鴻（3324-TW）、奇鋐（3017-TW）AI伺服器升級，液冷散熱需求持續放大",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6541423"
+      }
+    ],
     "3044": [
       {
         "date": "2026-07-19",
@@ -376,6 +432,26 @@
         "text": "〈焦點股〉電子五哥緯創、英業達相繼貼息 廣達除息秀沒漲聲跌逾4%",
         "heat": "",
         "url": "https://news.cnyes.com/news/id/6536550"
+      }
+    ],
+    "3324": [
+      {
+        "date": "2026-07-21",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "《價值型投資 最新產業研究報告》雙鴻（3324-TW）、奇鋐（3017-TW）AI伺服器升級，液冷散熱需求持續放大",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6541423"
+      }
+    ],
+    "3363": [
+      {
+        "date": "2026-07-21",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "台股重回到季線之上、上詮、國巨、華邦電",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6541675"
       }
     ],
     "3481": [
@@ -419,6 +495,14 @@
       }
     ],
     "5483": [
+      {
+        "date": "2026-07-21",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "中美晶攜手聯合再生斥資12.9億元 赴美建置年產能1GW太陽能模組廠明年出貨",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6541528"
+      },
       {
         "date": "2026-07-20",
         "source": "鉅亨",
@@ -554,20 +638,28 @@
     ],
     "AMD": [
       {
-        "date": "2026-07-17",
+        "date": "2026-07-21",
         "source": "Yahoo",
         "author": "Yahoo 股市新聞",
-        "text": "The Zacks Analyst Blog Highlights NVIDIA, AMD,  Taiwan Semiconductor Manufacturing and Seagate",
+        "text": "Zacks Investment Ideas feature highlights: AMD, Taiwan Semiconductor, NVIDIA, Meta Platforms and Microsoft",
         "heat": "",
-        "url": "https://finance.yahoo.com/markets/stocks/articles/zacks-analyst-blog-highlights-nvidia-132100178.html?.tsrc=rss"
+        "url": "https://finance.yahoo.com/markets/stocks/articles/zacks-investment-ideas-feature-highlights-072900984.html?.tsrc=rss"
+      },
+      {
+        "date": "2026-07-20",
+        "source": "Yahoo",
+        "author": "Yahoo 股市新聞",
+        "text": "AMD: Hyperscaler Deals Drive Growth",
+        "heat": "",
+        "url": "https://finance.yahoo.com/technology/articles/amd-hyperscaler-deals-drive-growth-181700704.html?.tsrc=rss"
       },
       {
         "date": "2026-07-17",
         "source": "Yahoo",
         "author": "Yahoo 股市新聞",
-        "text": "AMD Falls 5%, Intel Drops 4%, NVIDIA Slides 3% Before Recovering as Rotation Hits Semiconductor Stocks",
+        "text": "Nvidia, AMD, Mircon, TSMC Shares Sink as China Unveils Powerful New AI Model",
         "heat": "",
-        "url": "https://247wallst.com/investing/2026/07/17/amd-falls-5-intel-drops-4-nvidia-slides-3-before-recovering-as-rotation-hits-semiconductor-stocks/?.tsrc=rss"
+        "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-amd-mircon-tsmc-shares-175211072.html?.tsrc=rss"
       },
       {
         "date": "2026-07-17",
@@ -581,17 +673,17 @@
         "date": "2026-07-17",
         "source": "Yahoo",
         "author": "Yahoo 股市新聞",
-        "text": "Nvidia, AMD, Mircon, TSMC Shares Sink as China Unveils Powerful New AI Model",
+        "text": "AMD Falls 5%, Intel Drops 4%, NVIDIA Slides 3% Before Recovering as Rotation Hits Semiconductor Stocks",
         "heat": "",
-        "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-amd-mircon-tsmc-shares-175211072.html?.tsrc=rss"
+        "url": "https://247wallst.com/investing/2026/07/17/amd-falls-5-intel-drops-4-nvidia-slides-3-before-recovering-as-rotation-hits-semiconductor-stocks/?.tsrc=rss"
       },
       {
-        "date": "2026-07-16",
+        "date": "2026-07-17",
         "source": "Yahoo",
         "author": "Yahoo 股市新聞",
-        "text": "Why AMD Stock Is Falling Premarket Today Despite Fresh Price Target Hikes",
+        "text": "The Zacks Analyst Blog Highlights NVIDIA, AMD,  Taiwan Semiconductor Manufacturing and Seagate",
         "heat": "",
-        "url": "https://stocktwits.com/news-articles/markets/equity/why-amd-stock-is-falling-premarket-today-despite-fresh-price-target-hikes/cZZEPmER7rw?.tsrc=rss"
+        "url": "https://finance.yahoo.com/markets/stocks/articles/zacks-analyst-blog-highlights-nvidia-132100178.html?.tsrc=rss"
       },
       {
         "date": "2026-07-16",
@@ -600,6 +692,14 @@
         "text": "Lattice Semiconductor, AMD, and Qualcomm Shares Are Falling, What You Need To Know",
         "heat": "",
         "url": "https://finance.yahoo.com/markets/stocks/articles/lattice-semiconductor-amd-qualcomm-shares-224922431.html?.tsrc=rss"
+      },
+      {
+        "date": "2026-07-16",
+        "source": "Yahoo",
+        "author": "Yahoo 股市新聞",
+        "text": "Why AMD Stock Is Falling Premarket Today Despite Fresh Price Target Hikes",
+        "heat": "",
+        "url": "https://stocktwits.com/news-articles/markets/equity/why-amd-stock-is-falling-premarket-today-despite-fresh-price-target-hikes/cZZEPmER7rw?.tsrc=rss"
       }
     ],
     "MU": [
