@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-21",
+  "updated": "2026-07-22",
   "sources": [
     "PTT 股票板",
     "鉅亨網台股新聞",
@@ -54,6 +54,14 @@
     ],
     "2313": [
       {
+        "date": "2026-07-22",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "華通完成現增案張募集達86.1億元 現增股7/27上市交易",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6542714"
+      },
+      {
         "date": "2026-07-19",
         "source": "鉅亨",
         "author": "鉅亨網",
@@ -73,6 +81,14 @@
       }
     ],
     "2327": [
+      {
+        "date": "2026-07-22",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "買被錯殺、撿便宜、國巨、華邦電⊕、上詮⊕",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6542953"
+      },
       {
         "date": "2026-07-21",
         "source": "鉅亨",
@@ -100,6 +116,14 @@
     ],
     "2330": [
       {
+        "date": "2026-07-22",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "〈台股盤後〉台積電翻黑拖累4萬5攻關 續漲592點成交量還是未過兆元",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6542650"
+      },
+      {
         "date": "2026-07-21",
         "source": "鉅亨",
         "author": "鉅亨網",
@@ -111,25 +135,17 @@
         "date": "2026-07-20",
         "source": "鉅亨",
         "author": "鉅亨網",
-        "text": "〈台股盤後〉台積電反彈也難止跌  震盪逾千點收跌221點守住4萬2",
-        "heat": "",
-        "url": "https://news.cnyes.com/news/id/6540391"
-      },
-      {
-        "date": "2026-07-20",
-        "source": "鉅亨",
-        "author": "鉅亨網",
         "text": "台積電獨撐大局！櫃買狂洗緊鄰「極限落底區」，這些被錯殺族群甜甜價浮現！",
         "heat": "",
         "url": "https://news.cnyes.com/news/id/6540579"
       },
       {
-        "date": "2026-07-19",
+        "date": "2026-07-20",
         "source": "鉅亨",
         "author": "鉅亨網",
-        "text": "鉅亨速報 - Factset 最新調查：台積電(2330-TW)EPS預估上修至107.74元，預估目標價為3160元",
+        "text": "〈台股盤後〉台積電反彈也難止跌  震盪逾千點收跌221點守住4萬2",
         "heat": "",
-        "url": "https://news.cnyes.com/news/id/6539415"
+        "url": "https://news.cnyes.com/news/id/6540391"
       },
       {
         "date": "2026-07-19",
@@ -140,12 +156,12 @@
         "url": "https://news.cnyes.com/news/id/6538859"
       },
       {
-        "date": "2026-07-18",
+        "date": "2026-07-19",
         "source": "鉅亨",
         "author": "鉅亨網",
-        "text": "台積電法說、新青安3.0來了、台股史詩級崩跌2953點 本周大事回顧",
+        "text": "鉅亨速報 - Factset 最新調查：台積電(2330-TW)EPS預估上修至107.74元，預估目標價為3160元",
         "heat": "",
-        "url": "https://news.cnyes.com/news/id/6539108"
+        "url": "https://news.cnyes.com/news/id/6539415"
       },
       {
         "date": "2026-07-18",
@@ -156,20 +172,12 @@
         "url": "https://news.cnyes.com/news/id/6539250"
       },
       {
-        "date": "2026-07-17",
+        "date": "2026-07-18",
         "source": "鉅亨",
         "author": "鉅亨網",
-        "text": "台積電法說利多卻遭無情摜殺逾6%跌破季線 市值蒸發近4兆元",
+        "text": "台積電法說、新青安3.0來了、台股史詩級崩跌2953點 本周大事回顧",
         "heat": "",
-        "url": "https://news.cnyes.com/news/id/6538326"
-      },
-      {
-        "date": "2026-07-17",
-        "source": "鉅亨",
-        "author": "鉅亨網",
-        "text": "看台積電的法說會時除了先進製程，你還可以專注這個產業",
-        "heat": "",
-        "url": "https://news.cnyes.com/news/id/6538949"
+        "url": "https://news.cnyes.com/news/id/6539108"
       },
       {
         "date": "2026-07-17",
@@ -178,9 +186,25 @@
         "text": "AI狂潮踩剎車！台積電財報報喜卻血洗亞股，台股史上最大跌點寫紀錄",
         "heat": "",
         "url": "https://news.cnyes.com/news/id/6538897"
+      },
+      {
+        "date": "2026-07-17",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "看台積電的法說會時除了先進製程，你還可以專注這個產業",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6538949"
       }
     ],
     "2344": [
+      {
+        "date": "2026-07-22",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "買被錯殺、撿便宜、國巨、華邦電⊕、上詮⊕",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6542953"
+      },
       {
         "date": "2026-07-21",
         "source": "鉅亨",
@@ -256,12 +280,12 @@
     ],
     "2376": [
       {
-        "date": "2026-07-21",
+        "date": "2026-07-22",
         "source": "鉅亨",
         "author": "鉅亨網",
-        "text": "搶AI伺服器商機！兆豐、一銀及國泰世華統籌技嘉集團470億聯貸案超認2.11倍 ",
+        "text": "技嘉小金雞技宸7/27登興櫃 訂單能見度高今年營運看增",
         "heat": "",
-        "url": "https://news.cnyes.com/news/id/6541736"
+        "url": "https://news.cnyes.com/news/id/6542790"
       },
       {
         "date": "2026-07-21",
@@ -270,6 +294,14 @@
         "text": "技嘉旗下孫公司技宸前進資本市場 7/22舉行興櫃前法說會",
         "heat": "",
         "url": "https://news.cnyes.com/news/id/6541559"
+      },
+      {
+        "date": "2026-07-21",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "搶AI伺服器商機！兆豐、一銀及國泰世華統籌技嘉集團470億聯貸案超認2.11倍 ",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6541736"
       }
     ],
     "2377": [
@@ -319,6 +351,14 @@
       }
     ],
     "2408": [
+      {
+        "date": "2026-07-22",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "〈焦點股〉南亞受惠持股南亞科、南電漲停利多 飆漲逾8%站回200元大關",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6542653"
+      },
       {
         "date": "2026-07-10",
         "source": "Yahoo",
@@ -474,6 +514,16 @@
         "url": "https://finance.yahoo.com/news/taiwan-mobile-co-ltd-tpe-010116121.html?.tsrc=rss"
       }
     ],
+    "3131": [
+      {
+        "date": "2026-07-22",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "弘塑與德國Singulus深化合作 搶攻面板級封裝商機",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6542586"
+      }
+    ],
     "3231": [
       {
         "date": "2026-07-16",
@@ -495,6 +545,14 @@
       }
     ],
     "3363": [
+      {
+        "date": "2026-07-22",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "買被錯殺、撿便宜、國巨、華邦電⊕、上詮⊕",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6542953"
+      },
       {
         "date": "2026-07-21",
         "source": "鉅亨",
@@ -616,7 +674,25 @@
         "url": "https://news.cnyes.com/news/id/6536313"
       }
     ],
+    "8046": [
+      {
+        "date": "2026-07-22",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "〈焦點股〉南亞受惠持股南亞科、南電漲停利多 飆漲逾8%站回200元大關",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6542653"
+      }
+    ],
     "INTC": [
+      {
+        "date": "2026-07-21",
+        "source": "Yahoo",
+        "author": "Yahoo 股市新聞",
+        "text": "Chip Stocks Are Rebounding - Should Investors Buy Intel (INTC) Before Q2 Earnings?",
+        "heat": "",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/chip-stocks-rebounding-investors-buy-191200106.html?.tsrc=rss"
+      },
       {
         "date": "2026-07-20",
         "source": "Yahoo",
@@ -691,17 +767,17 @@
         "date": "2026-07-21",
         "source": "Yahoo",
         "author": "Yahoo 股市新聞",
-        "text": "Intel Jumps 6% on RBC’s Q2 Beat Call, AMD Rises 4%, Broadcom Climbs 3% as Chip Rally Resumes",
+        "text": "Zacks Investment Ideas feature highlights: AMD, Taiwan Semiconductor, NVIDIA, Meta Platforms and Microsoft",
         "heat": "",
-        "url": "https://247wallst.com/investing/2026/07/21/intel-jumps-6-on-rbcs-q2-beat-call-amd-rises-4-broadcom-climbs-3-as-the-chip-rally-resumes/?.tsrc=rss"
+        "url": "https://finance.yahoo.com/markets/stocks/articles/zacks-investment-ideas-feature-highlights-072900984.html?.tsrc=rss"
       },
       {
         "date": "2026-07-21",
         "source": "Yahoo",
         "author": "Yahoo 股市新聞",
-        "text": "Zacks Investment Ideas feature highlights: AMD, Taiwan Semiconductor, NVIDIA, Meta Platforms and Microsoft",
+        "text": "Intel Jumps 6% on RBC’s Q2 Beat Call, AMD Rises 4%, Broadcom Climbs 3% as Chip Rally Resumes",
         "heat": "",
-        "url": "https://finance.yahoo.com/markets/stocks/articles/zacks-investment-ideas-feature-highlights-072900984.html?.tsrc=rss"
+        "url": "https://247wallst.com/investing/2026/07/21/intel-jumps-6-on-rbcs-q2-beat-call-amd-rises-4-broadcom-climbs-3-as-the-chip-rally-resumes/?.tsrc=rss"
       },
       {
         "date": "2026-07-20",
@@ -715,17 +791,9 @@
         "date": "2026-07-17",
         "source": "Yahoo",
         "author": "Yahoo 股市新聞",
-        "text": "The Zacks Analyst Blog Highlights NVIDIA, AMD,  Taiwan Semiconductor Manufacturing and Seagate",
+        "text": "Nvidia, AMD, Mircon, TSMC Shares Sink as China Unveils Powerful New AI Model",
         "heat": "",
-        "url": "https://finance.yahoo.com/markets/stocks/articles/zacks-analyst-blog-highlights-nvidia-132100178.html?.tsrc=rss"
-      },
-      {
-        "date": "2026-07-17",
-        "source": "Yahoo",
-        "author": "Yahoo 股市新聞",
-        "text": "AMD Falls 5%, Intel Drops 4%, NVIDIA Slides 3% Before Recovering as Rotation Hits Semiconductor Stocks",
-        "heat": "",
-        "url": "https://247wallst.com/investing/2026/07/17/amd-falls-5-intel-drops-4-nvidia-slides-3-before-recovering-as-rotation-hits-semiconductor-stocks/?.tsrc=rss"
+        "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-amd-mircon-tsmc-shares-175211072.html?.tsrc=rss"
       },
       {
         "date": "2026-07-17",
@@ -739,17 +807,17 @@
         "date": "2026-07-17",
         "source": "Yahoo",
         "author": "Yahoo 股市新聞",
-        "text": "Nvidia, AMD, Mircon, TSMC Shares Sink as China Unveils Powerful New AI Model",
+        "text": "AMD Falls 5%, Intel Drops 4%, NVIDIA Slides 3% Before Recovering as Rotation Hits Semiconductor Stocks",
         "heat": "",
-        "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-amd-mircon-tsmc-shares-175211072.html?.tsrc=rss"
+        "url": "https://247wallst.com/investing/2026/07/17/amd-falls-5-intel-drops-4-nvidia-slides-3-before-recovering-as-rotation-hits-semiconductor-stocks/?.tsrc=rss"
       },
       {
-        "date": "2026-07-16",
+        "date": "2026-07-17",
         "source": "Yahoo",
         "author": "Yahoo 股市新聞",
-        "text": "Why AMD Stock Is Falling Premarket Today Despite Fresh Price Target Hikes",
+        "text": "The Zacks Analyst Blog Highlights NVIDIA, AMD,  Taiwan Semiconductor Manufacturing and Seagate",
         "heat": "",
-        "url": "https://stocktwits.com/news-articles/markets/equity/why-amd-stock-is-falling-premarket-today-despite-fresh-price-target-hikes/cZZEPmER7rw?.tsrc=rss"
+        "url": "https://finance.yahoo.com/markets/stocks/articles/zacks-analyst-blog-highlights-nvidia-132100178.html?.tsrc=rss"
       },
       {
         "date": "2026-07-16",
@@ -758,6 +826,14 @@
         "text": "Lattice Semiconductor, AMD, and Qualcomm Shares Are Falling, What You Need To Know",
         "heat": "",
         "url": "https://finance.yahoo.com/markets/stocks/articles/lattice-semiconductor-amd-qualcomm-shares-224922431.html?.tsrc=rss"
+      },
+      {
+        "date": "2026-07-16",
+        "source": "Yahoo",
+        "author": "Yahoo 股市新聞",
+        "text": "Why AMD Stock Is Falling Premarket Today Despite Fresh Price Target Hikes",
+        "heat": "",
+        "url": "https://stocktwits.com/news-articles/markets/equity/why-amd-stock-is-falling-premarket-today-despite-fresh-price-target-hikes/cZZEPmER7rw?.tsrc=rss"
       }
     ],
     "MU": [
