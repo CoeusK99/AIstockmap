@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-23",
+  "updated": "2026-07-24",
   "sources": [
     "PTT 股票板",
     "鉅亨網台股新聞",
@@ -244,6 +244,14 @@
     ],
     "2356": [
       {
+        "date": "2026-07-24",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "鉅亨速報 - Factset 最新調查：英業達(2356-TW)EPS預估下修至3.17元，預估目標價為56元",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6545095"
+      },
+      {
         "date": "2026-07-16",
         "source": "鉅亨",
         "author": "鉅亨網",
@@ -253,6 +261,14 @@
       }
     ],
     "2357": [
+      {
+        "date": "2026-07-24",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "華碩推出新一代AMD EPYC伺服器 加速企業級AI應用",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6545058"
+      },
       {
         "date": "2026-07-23",
         "source": "鉅亨",
@@ -273,17 +289,17 @@
         "date": "2026-07-16",
         "source": "鉅亨",
         "author": "鉅亨網",
-        "text": "華碩推ASUS EXPERTHUB平台搶攻轉型紅利 目標突破商用40%市占天花板",
+        "text": "華碩：中小企純硬體採購略微縮手 看好AI數位轉型潮可帶動需求",
         "heat": "",
-        "url": "https://news.cnyes.com/news/id/6537135"
+        "url": "https://news.cnyes.com/news/id/6537156"
       },
       {
         "date": "2026-07-16",
         "source": "鉅亨",
         "author": "鉅亨網",
-        "text": "華碩：中小企純硬體採購略微縮手 看好AI數位轉型潮可帶動需求",
+        "text": "華碩推ASUS EXPERTHUB平台搶攻轉型紅利 目標突破商用40%市占天花板",
         "heat": "",
-        "url": "https://news.cnyes.com/news/id/6537156"
+        "url": "https://news.cnyes.com/news/id/6537135"
       }
     ],
     "2360": [
@@ -332,12 +348,12 @@
     ],
     "2377": [
       {
-        "date": "2026-07-16",
+        "date": "2026-07-24",
         "source": "鉅亨",
         "author": "鉅亨網",
-        "text": "微星結盟資策會打造AI架構師 軟硬共構搶攻地端AI升級商機",
+        "text": "微星推出全新第六代AMD EPYC™伺服器平台陣容 協助客戶打造彈性化資料中心",
         "heat": "",
-        "url": "https://news.cnyes.com/news/id/6537161"
+        "url": "https://news.cnyes.com/news/id/6544895"
       },
       {
         "date": "2026-07-16",
@@ -346,6 +362,14 @@
         "text": "微星AI旗艦RTX Spark Q4首發上市 售價不到3000美元 首批貨已銷售一空",
         "heat": "",
         "url": "https://news.cnyes.com/news/id/6537167"
+      },
+      {
+        "date": "2026-07-16",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "微星結盟資策會打造AI架構師 軟硬共構搶攻地端AI升級商機",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6537161"
       }
     ],
     "2382": [
@@ -444,6 +468,14 @@
     ],
     "2455": [
       {
+        "date": "2026-07-24",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "微星推出全新第六代AMD EPYC™伺服器平台陣容 協助客戶打造彈性化資料中心",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6544895"
+      },
+      {
         "date": "2026-07-21",
         "source": "鉅亨",
         "author": "鉅亨網",
@@ -508,6 +540,14 @@
     ],
     "3008": [
       {
+        "date": "2026-07-24",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "大立光(3008)一個月內第三度公告取得不動產，擴產布局加速",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6545088"
+      },
+      {
         "date": "2026-07-23",
         "source": "鉅亨",
         "author": "鉅亨網",
@@ -549,6 +589,14 @@
       }
     ],
     "3017": [
+      {
+        "date": "2026-07-24",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "奇鋐武漢廠斥資逾10億元添購設備AI伺服器液冷產能全面擴張",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6545054"
+      },
       {
         "date": "2026-07-21",
         "source": "鉅亨",
@@ -606,6 +654,24 @@
         "url": "https://news.cnyes.com/news/id/6543801"
       }
     ],
+    "3105": [
+      {
+        "date": "2026-07-24",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "穩懋第2季每股盈餘2.30元優於預期AI光通訊與衛星需求實質推升營運",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6545087"
+      },
+      {
+        "date": "2026-07-24",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "〈穩懋法說〉產品組合轉佳 Q2獲利季增83% 上半年EPS 3.56元轉盈",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6545136"
+      }
+    ],
     "3131": [
       {
         "date": "2026-07-23",
@@ -636,12 +702,12 @@
     ],
     "3231": [
       {
-        "date": "2026-07-23",
+        "date": "2026-07-24",
         "source": "鉅亨",
         "author": "鉅亨網",
-        "text": "三大法人齊力買超164億元 外資掃貨緯創7.9萬張、大買台塑三寶",
+        "text": "外資賣超609億元調節台塑集團股  三大法人力捧緯創3天加碼15萬張",
         "heat": "",
-        "url": "https://news.cnyes.com/news/id/6544153"
+        "url": "https://news.cnyes.com/news/id/6545168"
       },
       {
         "date": "2026-07-23",
@@ -650,6 +716,14 @@
         "text": "零股排行榜出爐！0050、台積電、緯創人氣續飆，臻鼎-KY爆量背後藏什麼訊號？",
         "heat": "",
         "url": "https://news.cnyes.com/news/id/6543920"
+      },
+      {
+        "date": "2026-07-23",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "三大法人齊力買超164億元 外資掃貨緯創7.9萬張、大買台塑三寶",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6544153"
       },
       {
         "date": "2026-07-22",
@@ -724,6 +798,16 @@
         "url": "https://news.cnyes.com/news/id/6544227"
       }
     ],
+    "3532": [
+      {
+        "date": "2026-07-24",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "〈ETF成分股調整〉00891換股納中美晶、台勝科、大聯大 完整涵蓋AI供應鏈",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6544968"
+      }
+    ],
     "3665": [
       {
         "date": "2026-07-22",
@@ -742,6 +826,16 @@
         "text": "13座新廠連環開！看懂台積電「資本支出」密碼：漢唐、弘塑、家登...三階段受惠名單大公開",
         "heat": "",
         "url": "https://news.cnyes.com/news/id/6544257"
+      }
+    ],
+    "3702": [
+      {
+        "date": "2026-07-24",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "〈ETF成分股調整〉00891換股納中美晶、台勝科、大聯大 完整涵蓋AI供應鏈",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6544968"
       }
     ],
     "4749": [
@@ -766,12 +860,12 @@
     ],
     "4958": [
       {
-        "date": "2026-07-23",
+        "date": "2026-07-24",
         "source": "鉅亨",
         "author": "鉅亨網",
-        "text": "零股排行榜出爐！0050、台積電、緯創人氣續飆，臻鼎-KY爆量背後藏什麼訊號？",
+        "text": "臻鼎-KY旗下鵬鼎深圳第三園區動土 總投資逾百億人民幣 拚AI高階PCB供應力",
         "heat": "",
-        "url": "https://news.cnyes.com/news/id/6543920"
+        "url": "https://news.cnyes.com/news/id/6544996"
       },
       {
         "date": "2026-07-23",
@@ -780,6 +874,14 @@
         "text": "公司都澄清了，臻鼎-KY為何還大跌？股海老牛即時解析：現在要看的是這三件事",
         "heat": "",
         "url": "https://news.cnyes.com/news/id/6543963"
+      },
+      {
+        "date": "2026-07-23",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "零股排行榜出爐！0050、台積電、緯創人氣續飆，臻鼎-KY爆量背後藏什麼訊號？",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6543920"
       },
       {
         "date": "2026-07-19",
@@ -791,6 +893,14 @@
       }
     ],
     "5483": [
+      {
+        "date": "2026-07-24",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "〈ETF成分股調整〉00891換股納中美晶、台勝科、大聯大 完整涵蓋AI供應鏈",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6544968"
+      },
       {
         "date": "2026-07-21",
         "source": "鉅亨",
@@ -814,6 +924,16 @@
         "text": "好股票遇到鬼故事、大立光、中美晶、群創",
         "heat": "",
         "url": "https://news.cnyes.com/news/id/6538818"
+      }
+    ],
+    "6147": [
+      {
+        "date": "2026-07-24",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "頎邦重訊證實遭檢方搜索  7人裁定交保 股價一字鎖跌停",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6545150"
       }
     ],
     "6239": [
@@ -929,17 +1049,17 @@
         "date": "2026-07-23",
         "source": "鉅亨",
         "author": "鉅亨網",
-        "text": "【量大強漲股整理】台股震盪加劇，除權息四大關鍵 ＋ 輝達「暗光纖」隱藏下一波主流?!",
+        "text": "〈焦點股〉輝達傳收購「暗光纖」 點火光通訊股 聯亞連2天漲停",
         "heat": "",
-        "url": "https://news.cnyes.com/news/id/6544032"
+        "url": "https://news.cnyes.com/news/id/6543801"
       },
       {
         "date": "2026-07-23",
         "source": "鉅亨",
         "author": "鉅亨網",
-        "text": "〈焦點股〉輝達傳收購「暗光纖」 點火光通訊股 聯亞連2天漲停",
+        "text": "【量大強漲股整理】台股震盪加劇，除權息四大關鍵 ＋ 輝達「暗光纖」隱藏下一波主流?!",
         "heat": "",
-        "url": "https://news.cnyes.com/news/id/6543801"
+        "url": "https://news.cnyes.com/news/id/6544032"
       },
       {
         "date": "2026-07-16",
@@ -978,6 +1098,54 @@
     ],
     "AMD": [
       {
+        "date": "2026-07-24",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "微星推出全新第六代AMD EPYC™伺服器平台陣容 協助客戶打造彈性化資料中心",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6544895"
+      },
+      {
+        "date": "2026-07-24",
+        "source": "鉅亨",
+        "author": "鉅亨網",
+        "text": "華碩推出新一代AMD EPYC伺服器 加速企業級AI應用",
+        "heat": "",
+        "url": "https://news.cnyes.com/news/id/6545058"
+      },
+      {
+        "date": "2026-07-23",
+        "source": "Yahoo",
+        "author": "Yahoo 股市新聞",
+        "text": "MiTAC Computing Advances Agentic AI Infrastructure with 6th Gen AMD EPYC™ Server CPUs",
+        "heat": "",
+        "url": "https://finance.yahoo.com/technology/ai/articles/mitac-computing-advances-agentic-ai-183000615.html?.tsrc=rss"
+      },
+      {
+        "date": "2026-07-23",
+        "source": "Yahoo",
+        "author": "Yahoo 股市新聞",
+        "text": "MSI Launches 6th Gen AMD EPYC™ Server Portfolio",
+        "heat": "",
+        "url": "https://finance.yahoo.com/technology/articles/msi-launches-6th-gen-amd-183000369.html?.tsrc=rss"
+      },
+      {
+        "date": "2026-07-23",
+        "source": "Yahoo",
+        "author": "Yahoo 股市新聞",
+        "text": "AMD CEO says AI servers in full production, will ship this quarter",
+        "heat": "",
+        "url": "https://finance.yahoo.com/technology/ai/articles/amd-ceo-says-ai-servers-180733192.html?.tsrc=rss"
+      },
+      {
+        "date": "2026-07-23",
+        "source": "Yahoo",
+        "author": "Yahoo 股市新聞",
+        "text": "Lisa Su unveils AMD's AI roadmap, calling Helios 'the best AI rack in the world'",
+        "heat": "",
+        "url": "https://finance.yahoo.com/video/lisa-su-unveils-amds-ai-roadmap-calling-helios-the-best-ai-rack-in-the-world-202638137.html?.tsrc=rss"
+      },
+      {
         "date": "2026-07-23",
         "source": "Yahoo",
         "author": "Yahoo 股市新聞",
@@ -997,65 +1165,17 @@
         "date": "2026-07-21",
         "source": "Yahoo",
         "author": "Yahoo 股市新聞",
-        "text": "Intel Jumps 6% on RBC’s Q2 Beat Call, AMD Rises 4%, Broadcom Climbs 3% as Chip Rally Resumes",
-        "heat": "",
-        "url": "https://247wallst.com/investing/2026/07/21/intel-jumps-6-on-rbcs-q2-beat-call-amd-rises-4-broadcom-climbs-3-as-the-chip-rally-resumes/?.tsrc=rss"
-      },
-      {
-        "date": "2026-07-21",
-        "source": "Yahoo",
-        "author": "Yahoo 股市新聞",
         "text": "Zacks Investment Ideas feature highlights: AMD, Taiwan Semiconductor, NVIDIA, Meta Platforms and Microsoft",
         "heat": "",
         "url": "https://finance.yahoo.com/markets/stocks/articles/zacks-investment-ideas-feature-highlights-072900984.html?.tsrc=rss"
       },
       {
-        "date": "2026-07-20",
+        "date": "2026-07-21",
         "source": "Yahoo",
         "author": "Yahoo 股市新聞",
-        "text": "AMD: Hyperscaler Deals Drive Growth",
+        "text": "Intel Jumps 6% on RBC’s Q2 Beat Call, AMD Rises 4%, Broadcom Climbs 3% as Chip Rally Resumes",
         "heat": "",
-        "url": "https://finance.yahoo.com/technology/articles/amd-hyperscaler-deals-drive-growth-181700704.html?.tsrc=rss"
-      },
-      {
-        "date": "2026-07-17",
-        "source": "Yahoo",
-        "author": "Yahoo 股市新聞",
-        "text": "The Zacks Analyst Blog Highlights NVIDIA, AMD,  Taiwan Semiconductor Manufacturing and Seagate",
-        "heat": "",
-        "url": "https://finance.yahoo.com/markets/stocks/articles/zacks-analyst-blog-highlights-nvidia-132100178.html?.tsrc=rss"
-      },
-      {
-        "date": "2026-07-17",
-        "source": "Yahoo",
-        "author": "Yahoo 股市新聞",
-        "text": "AMD Falls 5%, Intel Drops 4%, NVIDIA Slides 3% Before Recovering as Rotation Hits Semiconductor Stocks",
-        "heat": "",
-        "url": "https://247wallst.com/investing/2026/07/17/amd-falls-5-intel-drops-4-nvidia-slides-3-before-recovering-as-rotation-hits-semiconductor-stocks/?.tsrc=rss"
-      },
-      {
-        "date": "2026-07-17",
-        "source": "Yahoo",
-        "author": "Yahoo 股市新聞",
-        "text": "Nvidia and AMD Hit by AI Selloff",
-        "heat": "",
-        "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-amd-hit-ai-selloff-200109203.html?.tsrc=rss"
-      },
-      {
-        "date": "2026-07-17",
-        "source": "Yahoo",
-        "author": "Yahoo 股市新聞",
-        "text": "Nvidia, AMD, Mircon, TSMC Shares Sink as China Unveils Powerful New AI Model",
-        "heat": "",
-        "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-amd-mircon-tsmc-shares-175211072.html?.tsrc=rss"
-      },
-      {
-        "date": "2026-07-16",
-        "source": "Yahoo",
-        "author": "Yahoo 股市新聞",
-        "text": "Why AMD Stock Is Falling Premarket Today Despite Fresh Price Target Hikes",
-        "heat": "",
-        "url": "https://stocktwits.com/news-articles/markets/equity/why-amd-stock-is-falling-premarket-today-despite-fresh-price-target-hikes/cZZEPmER7rw?.tsrc=rss"
+        "url": "https://247wallst.com/investing/2026/07/21/intel-jumps-6-on-rbcs-q2-beat-call-amd-rises-4-broadcom-climbs-3-as-the-chip-rally-resumes/?.tsrc=rss"
       }
     ],
     "MU": [
